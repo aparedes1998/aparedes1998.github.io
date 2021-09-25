@@ -1,0 +1,465 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>.\README.md</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id="content">
+    <h1 id="machine-learning">Machine Learning</h1>
+<p><img src="Introduccion%20a%20machine%20learning_files/ml1.jpg"></p>
+<p>Todos hemos escuchado los conceptos de “Machine Learning”, 
+“Inteligencia Artificial” y “Big Data” utilizados de forma simultanea 
+para representar cualquier acción realizada por una computadora de forma
+ autónoma. ¿Son estos términos intercambiables? ¿Hay diferencias entre 
+ellos? Este artículo busca responder esa pregunta.</p>
+<h2 id="inteligencia-artificial">Inteligencia Artificial</h2>
+<p>¿Qué es la inteligencia artificial? Probablemente hayas escuchado 
+este término varias veces en tu vida, especialmente en artículos de 
+noticias informáticas para referirse a las hazañas realizadas por una 
+computadora al enfrentarse a problemas del mundo real. <br>
+Hay que aclarar, que la inteligencia artificial no es lo mismo que el 
+aprendizaje automático, sino que es la base de la cual este surge. Este 
+concepto refiere a la habilidad de una computadora o cualquier máquina 
+de realizar tareas que requieren de “pensamiento” o lo que es lo mismo, 
+que solo un humano podría lograr utilizando su mente. En este campo cae 
+cualquier tipo de cálculo matemático o razonamiento lógico a partir de 
+un conjunto de premisas. Es la capacidad de un objeto inanimado de tomar
+ decisiones en base a escenarios varios dados por el ambiente en el que 
+se implemente (es decir, razonar).</p>
+<h2 id="machine-learning-1">Machine Learning</h2>
+<p>Ya habiendo definido Inteligencia artificial, es necesario definir 
+que es el aprendizaje automático o como es más comúnmente llamado, 
+Machine Learning. <br>
+Como vimos anteriormente, la inteligencia artificial refiere a la 
+capacidad de las máquinas de hacer tareas de forma programática para 
+resolver problemas específicos, pero, ¿Qué pasa si a la máquina un 
+problema aún más abstracto, que esta no sepa resolver?. ¿Cómo puede una 
+máquina resolver un problema si no sabe la respuesta a él pero si conoce
+ la resolución de problemas similares? Es aquí donde se presenta el 
+Machine Learning, la capacidad de una máquina de aprender, asociar y 
+clasificar datos en base a otros previamente clasificados. <br>
+Funciona de la siguiente manera:</p>
+<ul>
+<li>Primero, se alimenta a la máquina con datos sacados de un ambiente 
+real donde sepamos el resultado de la introducción de los mismos. </li>
+<li>Segundo, hacemos que la máquina analice los datos en busca de encontrar cómo, dada cierta entrada, hay una salida. </li>
+</ul>
+<p>El segundo paso es el que define la realidad matemática sobre el 
+aprendizaje automático, la cual es la búsqueda de la transformación o 
+función necesaria para mappear uno o varios datos de entrada a una 
+salida. Visto de forma matemática sería:</p>
+<p>Y=F(x)   </p>
+<p>Donde x es nuestro conjunto de entradas, Y es la salida dados esas 
+entradas y F es la función que el o los algoritmos de Machine learning 
+aplicados buscan encontrar, de forma de poder utilizar esa función F 
+para poder predecir la salida de nuevos datos de entrada en un futuro e 
+ir ajustándola a futuro para acercarla cada vez más a una transformación
+ perfecta.</p>
+
+        </div>
+        <style type="text/css" class="dark-mode-native-dark-original">body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }</style><style type="text/css" class="dark-mode-native-dark-cloned">body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #111;
+  background-color: #fdfdfd;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #24292e; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #24292e;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #24292e; }
+
+a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #eaecef;
+  color: #111;
+  /* Darker */ }</style>
+      
+    </body><link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><style type="text/css" id="dark-mode-custom-style" lang="en"></style><style type="text/css" id="dark-mode-native-style" lang="en">
+html, body {
+  color: #dcdcdc;
+  background-color: #292929;
+}
+
+html *:not(input) {
+  color: #dcdcdc !important;
+}
+
+a[ping]:link,
+:link:not(cite) {
+  color: #8db2e5 !important;
+}
+
+html a:visited {
+  color: #d248ea !important;
+}
+
+html cite,
+html cite a:link,
+html cite a:visited {
+  color: #92de92 !important;
+}
+
+/* inline styles */
+
+[style*='background: #'], [style*='background:#'],
+[style*='background: rgb'], [style*='background:rgb'],
+[style*='background: var('], [style*='background:var('],
+[style*='background-color: #'], [style*='background-color:#'],
+[style*='background-color: rgb'], [style*='background-color:rgb'],
+[style*='background-color: var('], [style*='background-color:var('] {
+  background-color: #292929 !important;
+}
+      </style></html>
