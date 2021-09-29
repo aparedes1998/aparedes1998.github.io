@@ -1,0 +1,284 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Analisis Iris</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id="content">
+    <h1 id="caso-de-estudio-dataset-iris">Caso de estudio: Dataset Iris</h1>
+<p><img src="Caso%20de%20estudio%20Dataset%20Iris_files/iris-machinelearning.png"></p>
+<p>En secciones anteriores, hablamos de qué era machine learning y el 
+gran énfasis que este hace en el análisis de datos. Para poner en 
+práctica lo visto anteriormente, se utiliza el dataset de las flores 
+Iris como caso de estudio en esta sección. De las herramientas vistas 
+anteriormente, utilizaremos Rapidminer para la generación y análisis de 
+estadísticas.</p>
+<h2 id="¿qué-contiene-este-dataset">¿Qué contiene este dataset?</h2>
+<p>El dataset analizado posee datos sobre mediciones de tres tipos de flores:</p>
+<ul>
+<li>Iris setosa</li>
+<li>Iris versicolor</li>
+<li>Iris virginica</li>
+</ul>
+<p>Las mediciones realizadas sobre este conjunto de flores, fueron de:</p>
+<ul>
+<li>Largo del sépalo</li>
+<li>Ancho del sépalo</li>
+<li>Largo del pétalo</li>
+<li>Ancho del pétalo</li>
+</ul>
+<p>La idea de tener estas mediciones para las flores registradas es 
+lograr poder ver patrones en estas medidas y poder en un futuro, crear 
+un modelo que sea capaz de predecir cual es el tipo de una flor de este 
+conjunto dadas solo las medidas del sépalo y pétalo.</p>
+<h2 id="análisis">Análisis</h2>
+<p>El dataset estudiado puede ser encontrado tanto incluído en la instalación básica de Rapidminer como también en: <a href="https://archive.ics.uci.edu/ml/datasets/iris">Iris Dataset</a></p>
+<p>En este tutorial se utilizará la versión presente en el enlace 
+anterior. Para comenzar a analizar este dataset en Rapidminer, 
+comenzamos importando los datos descargados de <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data">iris.data</a>
+ (Tener en cuenta que para analizar mejor este dataset, es recomendable 
+agregarle una fila al archivo iris.data conteniendo los nombres de las 
+columnas indicados en <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.names">iris.names</a>)</p>
+<p>El proceso en rapidminer se verá de la siguiente forma:</p>
+<p><img src="Caso%20de%20estudio%20Dataset%20Iris_files/rapidminer1_analisisIris.png"></p>
+<p>Finalmente, presionamos el botón de "Play" para correr el proceso.</p>
+<h3 id="resultados">Resultados</h3>
+<p>Para acceder a los resultados, iremos a la pestaña "Results" indicada
+ arriba. Allí, encontraremos varias pestañas más del lazo izquierdo.</p>
+<h4 id="data">Data</h4>
+<p>Esta pestaña sin modificar, nos mostrará el conjunto de datos en un 
+formato de tabla. Agregando otros operadores, es posible agregar 
+columnas extra que nos muestren datos estadísticos o definir cálculos 
+especiales.</p>
+<p align="center">
+<img src="Caso%20de%20estudio%20Dataset%20Iris_files/rapidminer3_analisisIris.png">
+</p>
+<h4 id="statistics">Statistics</h4>
+<p>Statistics aplicará un analisis de estadística descriptiva básico, 
+mostrando datos como el máximo, mínimo, desviación estandar y promedio. 
+Además, mostrará un histograma mostrando la distribución de los datos, 
+algo que para otros problemas, nos puede servir para saber si hay algún 
+sesgo en nuestros datos.</p>
+<p align="center">
+<img src="Caso%20de%20estudio%20Dataset%20Iris_files/rapidminer2_analisisIris.png">
+</p>
+<h4 id="visualizations">Visualizations</h4>
+<p>Finalmente, la pestaña Visualizations nos permitirá graficar los 
+datos procesados por Rapidminer utilizando todos los campos 
+especificados. Para analizar los datos, utilizaremos una gráfica 3D del 
+ancho del sépalo en función de la clase y con un color que se entone en 
+base al ancho del pétalo</p>
+<p align="center">
+<img src="Caso%20de%20estudio%20Dataset%20Iris_files/rapidminer4_analisisIris.png">
+</p>
+<p>¿Qué podemos ver de estos datos? A simple vista, podemos ver que 
+claramente, por la entonación de colores, los anchos de los pétalos son 
+muy diferentes en base a la flor de la que se habla. Las Iris setosas 
+tienen un ancho menor a 0.5 cm, mientras que las Iris versicolor tienen 
+anchos cercanos a 1.5 cm y las Iris Virginicas tienen anchos por encima 
+de los 2 cm.</p>
+<p align="center">
+<img src="Caso%20de%20estudio%20Dataset%20Iris_files/rapidminer5_analisisIris.png">
+</p>
+<p>Desde este otro ángulo, vemos como en realidad, el ancho del sépalo 
+es diferente entre las tres tipos de flores pero tampoco es una gran 
+diferencia. Combinando ambas vistas llegamos a la conclusión de que las 
+Iris setosas son las que presentan anchos de sépalo más grandes en 
+general, las versicolor las de menor ancho y las virginicas un promedio 
+entre ambas. </p>
+<h2 id="conclusión">Conclusión</h2>
+<p>Hemos analizado el dataset Iris y hemos visto como los datos vistos 
+en una gráfica 3D nos pueden revelar comportamientos de los distintos 
+tipos de flores. La importancia del analisis viene en que al ver 
+patrones de comportamiento entre flores del mismo grupo, podemos en un 
+futuro predecir un tipo de flor dados los datos sin clasificar.</p>
+
+        </div>
+        <style type="text/css">body {
+  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #dcdcdc;
+  background-color: #292929;
+  text-align: justify;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 5px;
+  }
+
+  body > #content {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+
+body > #content {
+  margin: 0px;
+  max-width: 900px;
+  border: 1px solid #555555;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+ * Links
+ */
+a {
+  color: #0366d6;
+  text-decoration: none; }
+  a:visited {
+    color: #0366d6; }
+  a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+
+pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #dcdcdc; }
+
+ul {
+  margin-top: 0; }
+
+li {
+  color: #dcdcdc;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+li + li {
+  margin-top: 0.25em; }
+
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #dcdcdc; }
+
+a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #555555;
+  color: #dcdcdc;
+  /* Darker */ }</style>
+      
+    </body></html>
