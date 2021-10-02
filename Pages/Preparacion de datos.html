@@ -6,7 +6,7 @@
       <body>
         <div id="content">
     <h1 id="preparación-de-datos">Preparación de datos</h1>
-<p><img src="Preparaci%C3%B3n%20de%20datos_files/prepdatos1.png"></p>
+<p><img src="Preparacion%20de%20datos_files/prepdatos1.png"></p>
 <p>Hasta ahora, hemos visto como el análisis de los dataset nos muestra a
  simple vista patrones específicos que nos permiten realizar 
 conclusiones sobre lo que se estudia. Pero, ¿Qué pasa si nos faltan 
@@ -16,7 +16,7 @@ En esta sección, definiremos los tipos de problemas más importantes que
 puede traer un dataset y veremos un ejemplo en Rapidminer de cómo 
 solucionarlos.</p>
 <h2 id="datos-faltantes">Datos faltantes</h2>
-<p><img src="Preparaci%C3%B3n%20de%20datos_files/prepdatos2.jpg"></p>
+<p><img src="Preparacion%20de%20datos_files/prepdatos2.jpg"></p>
 <p>Uno de los problemas más ocurrentes en el estudio de los dataset, es 
 encontrarse con datos faltantes. Específicamente, cuando nos faltan 
 columnas en un dato en lugar del dato entero. Imaginémonos el ejemplo 
@@ -86,7 +86,7 @@ del titanic y tiene un atributo que determina si la persona sobrevivió o
 sería capaz de sobrevivir al titanic dadas ciertas circunstancias (en la
  unidad siguiente, se va a realizar une estudio completo de este 
 problema).</p>
-<p><img src="Preparaci%C3%B3n%20de%20datos_files/prepdatos3.png"></p>
+<p><img src="Preparacion%20de%20datos_files/prepdatos3.png"></p>
 <p>Un analisis inicial en rapidminer, nos revela la cantidad de datos 
 faltantes en cada uno de los atributos del dataset. En este caso, vemos 
 como para la columna de edad, hay 263 datos faltantes de 1309. Al ser un
@@ -98,13 +98,13 @@ Rapidminer, ofrece un bloque especial para estos casos que se llama
 técnicas, está el uso del promedio, el máximo o mínimo de los valores 
 encontrados para esa columna, ponerle un 0 o simplemente, llenarlos con 
 un valor arbitrario.</p>
-<p><img src="Preparaci%C3%B3n%20de%20datos_files/prepdatos4.png"></p>
+<p><img src="Preparacion%20de%20datos_files/prepdatos4.png"></p>
 <p>En conjunto, se utiliza el operador "Filter examples" para eliminar 
 por completo las filas con datos faltantes en el resto de los atributos,
  dado que estos son muy pocos y no afectarán en gran medida al dataset 
 (El operador "Select attributes", fue utilizado para seleccionar la 
 columna "Age").</p>
-<p><img src="Preparaci%C3%B3n%20de%20datos_files/prepdatos6.png"></p>
+<p><img src="Preparacion%20de%20datos_files/prepdatos6.png"></p>
 <p>Finalmente, tenemos un dataset limpio, sin valores faltantes. Para 
 manejar outliers y normalizar la data, Rapidminer cuenta con dos 
 bloques, "Detect Outliers"  que utilizando un método configurable, marca
@@ -114,7 +114,7 @@ normalización. La normalización, es un proceso de estandarización de
 datos a un rango específico que permite que estos se lean de la misma 
 forma para cualquier dato en el conjunto, es muy util y casi que 
 imprescindible utilizarlo al preparar datos.</p>
-<p><img src="Preparaci%C3%B3n%20de%20datos_files/prepdatos5.png"></p>
+<p><img src="Preparacion%20de%20datos_files/prepdatos5.png"></p>
 <p>Es recomendable siempre usar estos 3 operadores en conjunto previo a 
 analizar un dataset para maximizar la eficiencia del analisis y 
 entrenamiento de modelos.</p>
