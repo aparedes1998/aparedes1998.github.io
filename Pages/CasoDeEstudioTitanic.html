@@ -5,7 +5,7 @@
         <body>
           <div id="content">
       <h1 id="caso-de-estudio-dataset-titanic-con-sklearn">Caso de estudio: Dataset Titanic con sklearn</h1>
-<p><img src="Caso%20de%20Estudio%20Dataset%20Titanic_files/analisistitanic.jpg"></p>
+<p><img src="CasoDeEstudioTitanic_files/analisistitanic.jpg"></p>
 <p>En este caso de estudio, vamos a ver el uso del lenguaje Python con 
 la librería sklearn para realizar una análisis de los datos del dataset 
 Titanic. Además, se mostrarán métodos para la limpieza de los datos como
@@ -100,7 +100,7 @@ testing[<span class="hljs-string">"Fare"</span>].fillna(testing[<span class="hlj
 null_table(training, testing)
 </code></pre>
 <p>Al imprimir nuevamente la tabla de valores nulos, vemos que pandas ya no identifica más valores faltantes.</p>
-<p><img src="Caso%20de%20Estudio%20Dataset%20Titanic_files/sklearntitanic1.png"></p>
+<p><img src="CasoDeEstudioTitanic_files/sklearntitanic1.png"></p>
 <h2 id="visualización-de-data">Visualización de Data</h2>
 <p>La librería seaborn de Python junto a matplotlib nos permite crear 
 gráficas programáticamente utilizando de 2 a n parámetros. A 
@@ -131,7 +131,7 @@ sns.barplot(x=<span class="hljs-string">"Sex"</span>, y=<span class="hljs-string
 plt.ylabel(<span class="hljs-string">"Survival Rate"</span>)
 plt.title(<span class="hljs-string">"Survival Rates Based on Gender and Class"</span>)
 </code></pre>
-<p><img src="Caso%20de%20Estudio%20Dataset%20Titanic_files/sklearntitanic2.png"></p>
+<p><img src="CasoDeEstudioTitanic_files/sklearntitanic2.png"></p>
 <p>Al visualizar esta data, podemos realizar conclusiones muy 
 interesantes. En principio, vemos como la supervivencia de las mujeres 
 es muchísimo más alta que la de los hombres (68% de los supervivientes 
@@ -185,7 +185,7 @@ training[<span class="hljs-string">"Embarked"</span>] = encoded_embarked_trainin
 encoded_embarked_testing = le_embarked.transform(testing[<span class="hljs-string">"Embarked"</span>])
 testing[<span class="hljs-string">"Embarked"</span>] = encoded_embarked_testing
 </code></pre>
-<p><img src="Caso%20de%20Estudio%20Dataset%20Titanic_files/sklearntitanic3.png"></p>
+<p><img src="CasoDeEstudioTitanic_files/sklearntitanic3.png"></p>
 <p>Como podemos ver, los datos fueron convertidos exitosamente en 
 numéricos, lo cual va a hacer que nuestro modelo pueda utilizar esas 
 características en sus predicciones y generar mejores resultados.</p>
