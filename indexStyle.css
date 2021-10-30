@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root
+{
+    --black: #fff;
+    --black2: #444;
+    --white: #333;
+    --white2: #444;
+}
+
+  
+
+body {
+  background-color: #0d1117;
+  margin:0;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  justify-content: center;
+  display: flex;
+  flex-direction: column
+}
+
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 10%;
+  background-color: #161b22;
+  width: 100%;
+}
+
+.logo {
+  margin-right: auto;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+}
+
+.nav__links a,
+.cta,
+.overlay__content a {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #edf0f1;
+  text-decoration: none;
+}
+
+.nav__links li {
+  padding: 0px 20px;
+}
+
+.nav__links li a {
+  transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+  color: #0088a9;
+}
+
+
+
+
+.container {
+  margin-top: 0%;
+  display: flex;
+  width: 70%;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+section
+{
+  position: relative;
+  min-height: 80vh;
+}
+
+.banner
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.banner .content    
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner .imgBx
+{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.banner .imgBx img
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h3
+{
+  position: relative;
+  font-size: 1.4em;
+  color: var(--black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+p
+{
+  color: #777;
+}
+
+.btn
+{
+  position: relative;
+  display: inline-block;
+  padding: 10px 30px;
+  background-color: var(--black2);
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.socialMedia
+{
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+}
+
+.socialMedia li
+{
+  list-style: none;
+}
+
+.socialMedia li a
+{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.05);
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--black);
+  font-size: 1.2em;
+}
+
+.socialMedia li a:hover
+{
+  background: var(--black2);
+  color: #fff;
+}
