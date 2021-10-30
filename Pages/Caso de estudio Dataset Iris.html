@@ -4,6 +4,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
       </head>
       <body>
+        <header>
+          <a class="logo" href="../index.html"><img src="../logo.svg" alt="logo"></a>
+          <nav>
+              <ul class="nav__links">
+                  <li><a href="../Machine Learning.html">Machine Learning</a></li>
+                  <li><a href="#">Proximamente..</a></li>
+              </ul>
+          </nav>
+      </header>
         <div id="content">
     <h1 id="caso-de-estudio-dataset-iris">Caso de estudio: Dataset Iris</h1>
 <p><img src="Caso%20de%20estudio%20Dataset%20Iris_files/iris-machinelearning.png"></p>
@@ -94,32 +103,30 @@ patrones de comportamiento entre flores del mismo grupo, podemos en un
 futuro predecir un tipo de flor dados los datos sin clasificar.</p>
 
         </div>
-        <style type="text/css">body {
-  font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        <style type="text/css">@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+body {
   color: #dcdcdc;
   background-color: #0d1117;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+body > #content {
   text-align: justify;
+  font-kerning: normal;
   -webkit-text-size-adjust: 100%;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
   -o-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  padding: 30px;
-}
-
-@media only screen and (max-width: 600px) {
-  body {
-    padding: 5px;
-  }
-
-  body > #content {
-    padding: 0px 20px 20px 20px !important;
-  }
-}
-
-body > #content {
-  margin: 0px;
+  margin-top: 2%;
   max-width: 900px;
   border: 1px solid #555555;
   padding: 10px 40px;
@@ -127,6 +134,8 @@ body > #content {
   border-radius: 2px;
   margin-left: auto;
   margin-right: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Poppins";
+  color: #dcdcdc;
 }
 
 hr {
@@ -140,19 +149,18 @@ hr {
 }
 
 /**
- * Links
- */
-a {
+  * Links
+  */
+.content a {
   color: #0366d6;
   text-decoration: none; }
-  a:visited {
+  .content a:visited {
     color: #0366d6; }
-  a:hover {
+  .content a:hover {
     color: #0366d6;
     text-decoration: underline; }
-
 pre {
-  background-color: #f6f8fa;
+  background-color: #161b22;
   border-radius: 3px;
   font-size: 85%;
   line-height: 1.45;
@@ -188,8 +196,8 @@ pre > code {
 
 
 /**
- * Blockquotes
- */
+  * Blockquotes
+  */
 blockquote {
   margin-left: 30px;
   margin-top: 0px;
@@ -210,8 +218,8 @@ blockquote * {
 }
 
 /**
- * Tables
- */
+  * Tables
+  */
 table {
   border-spacing: 2px;
   display: block;
@@ -244,11 +252,12 @@ table tr:nth-child(2n) {
 }
 
 /**
- * Others
- */
+  * Others
+  */
 
 img {
   max-width: 100%;
+  width: 100%;
 }
 
 p {
@@ -257,28 +266,87 @@ p {
   font-size: 16px;
   color: #dcdcdc; }
 
-ul {
+#content ul {
   margin-top: 0; }
 
-li {
+
+#content li {
   color: #dcdcdc;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5; }
 
-li + li {
+#content li + #content li {
   margin-top: 0.25em; }
 
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #dcdcdc; }
 
-a:visited {
+
+  #content a:visited {
   color: #0366d6; }
 
 h1, h2, h3 {
   border-bottom: 1px solid #555555;
   color: #dcdcdc;
-  /* Darker */ }</style>
+  /* Darker */ }
+
+  header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 10%;
+  background-color: #161b22;
+  width: 100%; 
+  box-sizing: border-box; 
+  font-family: "Poppins", sans-serif;
+}
+
+.logo {
+  margin-right: auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo img {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.nav__links {
+  box-sizing: border-box;
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.nav__links a,
+.cta,
+.overlay__content a {
+  font-weight: 500;
+  color: #edf0f1;
+  text-decoration: none;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav__links li {
+  padding: 0px 20px;
+  box-sizing: border-box;
+}
+
+.nav__links li a {
+  box-sizing: border-box;
+  padding: 0;
+  transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+  color: #0088a9;
+}
+</style>
       
     </body></html>
