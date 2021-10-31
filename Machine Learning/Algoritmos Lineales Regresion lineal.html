@@ -1,0 +1,454 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <title>Algoritmos Lineales: Regresión lineal</title>
+        </head>
+        <header>
+          <a class="logo" href="../index.html"><img src="../logo.svg" alt="logo"></a>
+          <nav>
+              <ul class="nav__links">
+                  <li><a href="../Machine Learning.html">Machine Learning</a></li>
+                  <li><a href="#">Proximamente..</a></li>
+              </ul>
+          </nav>
+      </header>
+        <body>
+          <div id="content">
+      <h1 id="algoritmos-lineales-regresión-lineal">Algoritmos Lineales: Regresión lineal</h1>
+<p><img src="Algoritmos%20Lineales%20Regresion%20lineal_files/linearalg1.png"></p>
+<p>En Machine learning, existen distintos tipos de algoritmos que 
+permiten crear funciones para poder clasificar datos en distintos tipos.
+ Los algoritmos lineales son aquellos en donde nuestro modelo asume que 
+nuestro conjunto de variables "x" estan linearmente relacionadas con la 
+salida "y", es decir que existe una función f(x) tal que f(x) = a1.x1 + 
+a2.x2 + … + an.xn + b (los pares "ai.xi" corresponden a cada 
+característica que se tenga de los datos). </p>
+<h2 id="regresión-lineal-simple">Regresión lineal simple:</h2>
+<p>La técnica más clásica de todas, se basa en encontrar una recta: y = 
+ax + b que nos permita a futuro poder determinar datos dada solo una 
+entrada. Las "x" son las variables independientes, es decir, nuestra 
+entrada e "Y" es la salida. La idea es buscar la pendiente "a" y la 
+ordenada "b" para determinar la mejor recta posible de forma que todos 
+los puntos se encuentren lo más cerca de ella como sea posible. Para 
+encontrar la mejor linea de ajuste, se usa habitualmente el método de 
+mínimos cuadrados, técnica de análisis numérico y estadística que busca 
+minimizar la suma de cuadrados de las diferencias en los residuos (las 
+ordenadas b) entre los puntos generados con la función encontrada y los 
+datos.</p>
+<h2 id="regresión-lineal-múltiple">Regresión lineal múltiple:</h2>
+<p>Muy parecida a la anterior, salvo que esta permite el uso de más de 
+una entrada "x" de forma de crear una función: f(x) = a1.x1 + a2.x2 + … +
+ an.xn + b. Esto nos permite crear una recta mucho más compleja y más 
+ajustada ya que se usan una mayor cantidad de variables independientes. 
+Algo a tener cuidado con este método es que no siempre es mejor que la 
+simple, ya que usar varias variables independientes donde se tiene una o
+ dos muy correlacionadas con la salida y el resto con poca correlación 
+puede empeorar el rendimiento de nuestro modelo.</p>
+<h2 id="ejemplo-en-python">Ejemplo en Python:</h2>
+<p>Para este ejemplo, usaremos un dataset ficticio en el cual 
+definiremos una relación entre las horas de estudio para un examen y la 
+calificación en este.</p>
+<p>Importamos las librerías:</p>
+<pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> linear_model, metrics, model_selection
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+</code></pre>
+<p>Cargamos los datos y dibujamos una gráfica para mostrarlos:</p>
+<pre><code class="hljs python language-python">num_hours_studied = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>])
+exam_score = np.array([<span class="hljs-number">18</span>, <span class="hljs-number">26</span>, <span class="hljs-number">31</span>, <span class="hljs-number">40</span>, <span class="hljs-number">55</span>, <span class="hljs-number">62</span>, <span class="hljs-number">71</span>, <span class="hljs-number">70</span>, <span class="hljs-number">75</span>, <span class="hljs-number">85</span>, <span class="hljs-number">97</span>])
+plt.scatter(num_hours_studied, exam_score)
+plt.xlabel(<span class="hljs-string">'num_hours_studied'</span>)
+plt.ylabel(<span class="hljs-string">'exam_score'</span>)
+plt.show()
+</code></pre>
+<p>Ahora, utilizaremos le método de regresión lineal de la librería 
+sklearn, dándole como entrada para su entrenamiento los arrays definidos
+ en el paso anterior.</p>
+<pre><code class="hljs python language-python"><span class="hljs-comment"># Entrenar el modelo</span>
+exam_model = linear_model.LinearRegression(normalize=<span class="hljs-literal">True</span>)
+x = np.expand_dims(num_hours_studied, <span class="hljs-number">1</span>)
+y = exam_score
+exam_model.fit(x, y)
+a = exam_model.coef_
+b = exam_model.intercept_
+print(exam_model.coef_)
+print(exam_model.intercept_)
+</code></pre>
+<p>De esto obtendremos los valores a y b de la recta y = ax + b. 
+Finalmente, obtendremos una fórmula predictora,  y = 9,402x + 4.278. 
+Ahora con esta fórmula podemos predecir valores nuevos simplemente 
+cambiando la x por un valor nuevo de "horas estudiadas".</p>
+<p>Para ver los resultados utilizamos el siguiente código para dibujar la recta del paso anterior:</p>
+<pre><code class="hljs python language-python"><span class="hljs-comment"># Ver los resultados</span>
+plt.scatter(num_hours_studied, exam_score)
+x = np.linspace(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)
+y = a*x + b
+plt.plot(x, y, <span class="hljs-string">'r'</span>)
+plt.xlabel(<span class="hljs-string">'num_hours_studied'</span>)
+plt.ylabel(<span class="hljs-string">'exam_score'</span>)
+plt.show()
+</code></pre>
+<p><img src="Algoritmos%20Lineales%20Regresion%20lineal_files/linearalg2.png"></p>
+<p>Como podemos ver en estas gráficas, la recta creada se ajusta muy 
+bien a los datos, eso se basa a que dimos un escenario ficticio en el 
+cual hay una presunta relación lineal entre las variables, donde a 
+simple vista, a medida que crecen las horas de estudio, crecen los 
+resultados del examen. <br>
+Algo a tener en cuenta es que estos casos son especiales y no ocurren 
+muy seguido, por lo que este método no es demasiado aplicable a 
+problemas más complejos ya que puede haber un gran sobreajuste 
+(overfitting).</p>
+<h2 id="enlaces-de-interés">Enlaces de interés:</h2>
+<ul>
+<li><a href="https://www.kaggle.com/timniven/linear-regression-tutorial">Ejemplo utilizado</a></li>
+<li><a href="https://www.analyticsvidhya.com/blog/2021/05/5-regression-algorithms-you-should-know-introductory-guide/">Explicación simple de regresión lineal</a></li>
+</ul>
+          </div>
+          <style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+body {
+  color: #dcdcdc;
+  background-color: #0d1117;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+body > #content {
+  text-align: justify;
+  font-kerning: normal;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  margin-top: 2%;
+  max-width: 900px;
+  border: 1px solid #555555;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Poppins";
+  color: #dcdcdc;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  * Links
+  */
+.content a {
+  color: #0366d6;
+  text-decoration: none; }
+  .content a:visited {
+    color: #0366d6; }
+  .content a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+pre {
+  background-color: #161b22;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+}
+
+
+/**
+  * Blockquotes
+  */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+  * Tables
+  */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+  * Others
+  */
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #dcdcdc; }
+
+#content ul {
+  margin-top: 0; }
+
+
+#content li {
+  color: #dcdcdc;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+#content li + #content li {
+  margin-top: 0.25em; }
+
+
+
+  #content a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #555555;
+  color: #dcdcdc;
+  /* Darker */ }
+
+  header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 10%;
+  background-color: #161b22;
+  width: 100%; 
+  box-sizing: border-box; 
+  font-family: "Poppins", sans-serif;
+}
+
+.logo {
+  margin-right: auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo img {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.nav__links {
+  box-sizing: border-box;
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.nav__links a,
+.cta,
+.overlay__content a {
+  font-weight: 500;
+  color: #edf0f1;
+  text-decoration: none;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav__links li {
+  padding: 0px 20px;
+  box-sizing: border-box;
+}
+
+.nav__links li a {
+  box-sizing: border-box;
+  padding: 0;
+  transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+  color: #0088a9;
+}
+</style>
+<style type="text/css">/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #c9d1d9;
+  background: #161b22;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6aa94f;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #569cd6;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #dcdcaa;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+</style>
+        
+      </body></html>
