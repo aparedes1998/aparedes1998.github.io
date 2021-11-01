@@ -126,249 +126,352 @@ programadas a mano.</li>
 
         </div>
   
-  <style type="text/css" class="dark-mode-native-dark-cloned" disabled="">
-
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-
-body {
-  color: #dcdcdc;
-  background-color: #0d1117;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  justify-content: center;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-}
-
-
-
-body > #content {
-  text-align: justify;
-  font-kerning: normal;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  margin-top: 2%;
-  max-width: 900px;
-  border: 1px solid #555555;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Poppins";
-  color: #dcdcdc;
-}
-
-hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
-}
-
-/**
- * Links
- */
-.content a {
-  color: #0366d6;
-  text-decoration: none; }
-  .content a:visited {
-    color: #0366d6; }
-  .content a:hover {
+<style type="text/css">
+  @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+  
+  body {
+    color: #dcdcdc;
+    background-color: #0d1117;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  
+  
+  body > #content {
+    text-align: justify;
+    font-kerning: normal;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    margin-top: 2%;
+    max-width: 900px;
+    border: 1px solid #555555;
+    padding: 10px 40px;
+    padding-bottom: 20px;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Poppins";
+    color: #dcdcdc;
+  }
+  
+  hr {
+    color: #bbb;
+    background-color: #bbb;
+    height: 1px;
+    flex: 0 1 auto;
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+  }
+  
+  /**
+    * Links
+    */
+  .content a {
     color: #0366d6;
-    text-decoration: underline; }
-
-pre {
-  background-color: #f6f8fa;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
-}
-
-/**
-  * Code blocks
+    text-decoration: none; }
+    .content a:visited {
+      color: #0366d6; }
+    .content a:hover {
+      color: #0366d6;
+      text-decoration: underline; }
+  pre {
+    background-color: #161b22;
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+  }
+  
+  /**
+    * Code blocks
+    */
+  
+  code {
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    word-wrap: break-word;
+    padding: .2em .4em;
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  }
+  
+  pre > code {
+    background-color: transparent;
+    border: 0;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    word-wrap: normal;
+    font-size: 100%;
+  }
+  
+  
+  /**
+    * Blockquotes
+    */
+  blockquote {
+    margin-left: 30px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    border-left-width: 3px;
+    padding: 0 1em;
+    color: #828282;
+    border-left: 4px solid #e8e8e8;
+    padding-left: 15px;
+    font-size: 18px;
+    letter-spacing: -1px;
+    font-style: italic;
+  }
+  blockquote * {
+    font-style: normal !important;
+    letter-spacing: 0;
+    color: #6a737d !important;
+  }
+  
+  /**
+    * Tables
+    */
+  table {
+    border-spacing: 2px;
+    display: block;
+    font-size: 14px;
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 16px;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  
+  td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+  
+  th {
+    font-weight: 600;
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+  
+  tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+  }
+  
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+  
+  /**
+    * Others
+    */
+  
+  img {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  p {
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #dcdcdc; }
+  
+  #content ul {
+    margin-top: 0; }
+  
+  
+  #content li {
+    color: #dcdcdc;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5; }
+  
+  #content li + #content li {
+    margin-top: 0.25em; }
+  
+  
+  
+    #content a:visited {
+    color: #0366d6; }
+  
+  h1, h2, h3 {
+    border-bottom: 1px solid #555555;
+    color: #dcdcdc;
+    /* Darker */ }
+  
+    header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 10%;
+    background-color: #161b22;
+    width: 100%; 
+    box-sizing: border-box; 
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .logo {
+    margin-right: auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .logo img {
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  nav {
+    box-sizing: border-box;
+    padding: 0;
+  }
+  
+  .nav__links {
+    box-sizing: border-box;
+    list-style: none;
+    display: flex;
+    padding: 0;
+  }
+  
+  .nav__links a,
+  .cta,
+  .overlay__content a {
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .nav__links li {
+    padding: 0px 20px;
+    box-sizing: border-box;
+  }
+  
+  .nav__links li a {
+    box-sizing: border-box;
+    padding: 0;
+    transition: all 0.3s ease 0s;
+  }
+  
+  .nav__links li a:hover {
+    color: #0088a9;
+  }
+  </style>
+  <style type="text/css">/*
+  
+  github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+  
   */
-
-code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-}
-
-pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
-}
-
-
-/**
- * Blockquotes
- */
-blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
-}
-blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
-}
-
-/**
- * Tables
- */
-table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-
-td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
-}
-
-th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
-}
-
-tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
-}
-
-table tr:nth-child(2n) {
-  background-color: #f6f8fa;
-}
-
-/**
- * Others
- */
-
-img {
-  max-width: 100%;
-}
-
-p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #dcdcdc; }
-
- .content ul {
-  margin-top: 0; }
-
-.content li {
-  color: #dcdcdc;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
-
-  .content li + .content li {
-  margin-top: 0.25em; }
-
-
-.content a:visited {
-  color: #0366d6; }
-
-h1, h2, h3 {
-  border-bottom: 1px solid #555555;
-  color: #dcdcdc;
-  /* Darker */ }
-  header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px 10%;
-  background-color: #161b22;
-  width: 100%; 
-  box-sizing: border-box; 
-  font-family: "Poppins", sans-serif;
-}
-
-.logo {
-  margin-right: auto;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.logo img {
-  padding: 0;
-  box-sizing: border-box;
-}
-
-nav {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.nav__links {
-  box-sizing: border-box;
-  list-style: none;
-  display: flex;
-  padding: 0;
-}
-
-.nav__links a,
-.cta,
-.overlay__content a {
-  font-weight: 500;
-  color: #edf0f1;
-  text-decoration: none;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.nav__links li {
-  padding: 0px 20px;
-  box-sizing: border-box;
-}
-
-.nav__links li a {
-  box-sizing: border-box;
-  padding: 0;
-  transition: all 0.3s ease 0s;
-}
-
-.nav__links li a:hover {
-  color: #0088a9;
-}
+  
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #c9d1d9;
+    background: #161b22;
+  }
+  
+  .hljs-comment,
+  .hljs-quote {
+    color: #6aa94f;
+    font-style: italic;
+  }
+  
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #569cd6;
+    font-weight: bold;
+  }
+  
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+  
+  .hljs-string,
+  .hljs-doctag {
+    color: #d14;
+  }
+  
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #dcdcaa;
+    font-weight: bold;
+  }
+  
+  .hljs-subst {
+    font-weight: normal;
+  }
+  
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+  
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #000080;
+    font-weight: normal;
+  }
+  
+  .hljs-regexp,
+  .hljs-link {
+    color: #009926;
+  }
+  
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #990073;
+  }
+  
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #0086b3;
+  }
+  
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+  
+  .hljs-deletion {
+    background: #fdd;
+  }
+  
+  .hljs-addition {
+    background: #dfd;
+  }
+  
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  
+  .hljs-strong {
+    font-weight: bold;
+  }
+  </style>
   
   </style>
       
