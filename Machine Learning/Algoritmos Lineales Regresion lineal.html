@@ -1,16 +1,28 @@
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
           <title>Algoritmos Lineales: Regresión lineal</title>
         </head>
         <header>
-          <a class="logo" href="../index.html"><img src="../logo.svg" alt="logo"></a>
+          <div class="logo">AGUSTIN PAREDES</div>
           <nav>
-              <ul class="nav__links">
+              <ul>
+                  <li><a href="../index.html">Home</a></li>
                   <li><a href="../Machine Learning.html">Machine Learning</a></li>
-                  <li><a href="#">Proximamente..</a></li>
+                  <li><a href="#">Proximamente ...</a></li>
               </ul>
           </nav>
+          <div class="menu-toggle" onclick="show()"><i class="fa fa-bars" aria-hidden="true"></i></div>
       </header>
+      <script>
+        
+          function show(){
+              let toggle = document.querySelector('.menu-toggle');
+              let navigation= document.querySelector('nav');
+              navigation.classList.toggle('active');
+          }
+      </script>
         <body>
           <div id="content">
       <h1 id="algoritmos-lineales-regresión-lineal">Algoritmos Lineales: Regresión lineal</h1>
@@ -112,7 +124,7 @@ body {
   background-color: #0d1117;
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin-top: 50;
   justify-content: center;
   align-items: center;
   font-family: "Poppins", sans-serif;
@@ -153,12 +165,12 @@ hr {
 /**
   * Links
   */
-.content a {
+#content a {
   color: #0366d6;
   text-decoration: none; }
-  .content a:visited {
+  #content a:visited {
     color: #0366d6; }
-  .content a:hover {
+  #content a:hover {
     color: #0366d6;
     text-decoration: underline; }
 pre {
@@ -194,6 +206,7 @@ pre > code {
   padding: 0;
   word-wrap: normal;
   font-size: 100%;
+  white-space: pre-wrap;
 }
 
 
@@ -291,63 +304,108 @@ h1, h2, h3 {
   color: #dcdcdc;
   /* Darker */ }
 
-  header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px 10%;
-  background-color: #161b22;
-  width: 100%; 
-  box-sizing: border-box; 
-  font-family: "Poppins", sans-serif;
+  header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 100px;
+    background: #161b22;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.logo {
-  margin-right: auto;
-  padding: 0;
-  box-sizing: border-box;
+header .logo
+{
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    float: left;
+    font-weight: bold;
 }
 
-.logo img {
-  padding: 0;
-  box-sizing: border-box;
+header nav 
+{
+    float: right;
+
 }
 
-nav {
-  box-sizing: border-box;
-  padding: 0;
+header nav ul
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
-.nav__links {
-  box-sizing: border-box;
-  list-style: none;
-  display: flex;
-  padding: 0;
+header nav ul li
+{
+    list-style: none;
 }
 
-.nav__links a,
-.cta,
-.overlay__content a {
-  font-weight: 500;
-  color: #edf0f1;
-  text-decoration: none;
-  padding: 0;
-  box-sizing: border-box;
+header nav ul li a
+{
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
 }
 
-.nav__links li {
-  padding: 0px 20px;
-  box-sizing: border-box;
+header nav ul li a:hover
+{
+    color: #fff;
+    background-color: #2196f3;
 }
 
-.nav__links li a {
-  box-sizing: border-box;
-  padding: 0;
-  transition: all 0.3s ease 0s;
+.menu-toggle
+{
+    color: #fff;
+    float: right;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
 }
 
-.nav__links li a:hover {
-  color: #0088a9;
+@media (max-width: 991px)
+{
+    header
+    {
+        padding: 0 20px;
+        z-index: 1;
+    }
+    .menu-toggle
+    {
+        display: block;
+        margin-top: 13;
+    }
+    header nav
+    {
+        position: absolute;
+        width: 100%;
+        height: calc(100vh - 50px);
+        background: #333;
+        top: 50px;
+        left: -100%;
+        transition: 0.5s;
+    }
+    header nav.active
+    {
+        left: 0;
+    }
+    header nav ul
+    {
+        display: block;
+        text-align: center;
+    }
+
+    header nav ul li a 
+    {
+        border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+    
 }
 </style>
 <style type="text/css">/*
