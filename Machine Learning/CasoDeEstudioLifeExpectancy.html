@@ -1,0 +1,805 @@
+<html>
+  <head>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+          <title>Life expectancy dataset</title>
+  </head>
+        <body>
+          <header>
+            <div class="logo">AGUSTIN PAREDES</div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../Machine Learning.html">Machine Learning</a></li>
+                    <li><a href="#">Proximamente ...</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" onclick="show()"><i class="fa fa-bars" aria-hidden="true"></i></div>
+        </header>
+        <script>
+          
+            function show(){
+                let toggle = document.querySelector('.menu-toggle');
+                let navigation= document.querySelector('nav');
+                navigation.classList.toggle('active');
+            }
+        </script>
+          <div id="content">
+      <h1 id="caso-de-estudio-esperanza-de-vida-a-nivel-global-omswho">Caso de estudio: Esperanza de vida a nivel global (OMS/WHO)</h1>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp1.jpg"></p>
+<p>Durante toda la existencia de la humanidad, las personas se han 
+obsesionado con un único objetivo, vivir más tiempo. Hoy en día, existen
+ miles de estudios sobre los factores determinantes en la cantidad de 
+años que una persona vive y la calidad con la que lo hace. De ese deseo 
+inherente en las personas, es que aparecen datasets como el que vamos a 
+analizar en este caso de estudio. Estos datos fueron tomados 
+directamente de la organización mundial de la salud y poseen datos sobre
+ la esperanza de vida en cada país entre los años 2000 y 2015. Asimismo,
+ muestra datos específicos de estas poblaciones en cada año que, de ser 
+analizada correlacionalmente, nos puede permitir crear modelos y 
+predecir cuanto puede vivir una persona de acuerdo a estos.</p>
+<h2 id="dataset">Dataset</h2>
+<p>Como se menciona anteriormente, este dataset tiene datos de todos los
+ paises adheridos a la OMS entre los años 2000 y 2015. Además, para cada
+ uno de esos años y para cada país, contiene los siguientes datos:</p>
+<ul>
+<li>Estado: Si el país se encuentra desarrollado o no.</li>
+<li>Esperanza de vida: Variable objetivo del análisis, cuantos años se vive en promedio.</li>
+<li>Mortalidad en adultos: Cuantas personas entre 15 y 60 años murieron ese año por cada 1000.</li>
+<li>Mortalidad infantil: Muertes de niños (menores de 15).</li>
+<li>Alcohol: Consumo de alcohol en litros (alcohol puro) per capita</li>
+<li>Gasto porcentual: Gasto en salud como porcentaje del producto bruto interno per capita.</li>
+<li>Hepatitis B: Porcentaje de inmunización a la hepatitis B.</li>
+<li>Sarampion(Measles): Casos reportados de sarampión.</li>
+<li>BMI: Promedio de Índice de masa corporal</li>
+<li>Muertes debajo de 5 años: Número de muertes por debajo de los 5 años de edad.</li>
+<li>Polio: Porcentaje de inmunización al polio</li>
+<li>Gasto total: Gasto general del gobierno en salud como un porcentaje del total de gasto gubernamental.</li>
+<li>Diphtheria: Porcentaje de inmunización al tétano.</li>
+<li>HIV/AIDS: Muertes de niños nacidos con sida(entre 0 y 4 años de edad).</li>
+<li>GDP: Producto bruto interno (PBI) en dólares.</li>
+<li>Población: Población del país.</li>
+<li>Delgadez en adolescentes entre 10 y 19 años: Prevalencia de delgadez en adolescentes desde 10 hasta 19 años de edad.</li>
+<li>Delgadez entre 5 y 9 años de eddad: Prevalencia de delgadez de niños entre 5 y 9 años de edad.</li>
+<li>Indice de composición de recursos: Valor de indice de desarrollo 
+humano en términos de composicion de recursos (0 es que un país usa sus 
+recursos ineficientemente completamente y 1 es que un país usa todos sus
+ recursos de la forma más eficiente posible).</li>
+<li>Educación: Número de años de educación en promedio.</li>
+</ul>
+<h2 id="objetivo">Objetivo</h2>
+<p>Realizaremos un análisis extensivo del dataset utilizando Python con 
+el fin de estudiar y obtener información interesante del dataset. Se 
+recomienda Google Colab para Python por ser gratuito y tener ya 
+instaladas todas las librerías que vamos a necesitar. </p>
+<h2 id="preparación-de-datos">Preparación de datos</h2>
+<p>Como siempre, hay que comenzar analizando y limpiando los datos del 
+dataset. Comenzamos por importar las librerías que vamos a utilizar en 
+el resto del caso de estudio.</p>
+<pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> scipy.stats <span class="hljs-keyword">as</span> stats
+<span class="hljs-keyword">from</span> scipy.stats.mstats <span class="hljs-keyword">import</span> winsorize
+<span class="hljs-keyword">from</span> sklearn.decomposition <span class="hljs-keyword">import</span> PCA
+<span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> scale
+<span class="hljs-keyword">import</span> os
+%matplotlib inline
+</code></pre>
+<p>Luego, cargamos el dataset utilizando pandas y usamos el método "head" para obtener un primer vistazo a los datos.</p>
+<pre><code class="hljs python language-python">dataset = pd.read_csv(<span class="hljs-string">'../input/life-expectancy-who/Life Expectancy Data.csv'</span>)
+dataset.head()
+</code></pre>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp2.png"></p>
+<p>Primero que nada, vamos a utilizar el método "describe" de pandas 
+para obtener una vista estadística de las columnas del dataset:</p>
+<pre><code class="hljs python language-python">dataset.describe().iloc[:, <span class="hljs-number">1</span>:]
+</code></pre>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp3.png"></p>
+<p>De esta vista, obtenemos datos muy interesantes, principalmente lo siguiente:</p>
+<ul>
+<li>Mortalidad infantil con un mínimo de 0. Algo prácticamente imposible en cualquier país.</li>
+<li>BMI de mínimo 0 y máximo 87: Anatomicamente imposible tener un 
+indice de masa corporal de 0. Asimismo, un promedio de 87 en una 
+población es imposible, ya que esto constituye un caso muy especial de 
+super obesidad.</li>
+<li>Mortalidad de menores de 5 con un mínimo de 0: Mismo caso que la mortalidad infantil.</li>
+<li>GDP/PBI de mínimo 1.68 dolares: No existe un país tan pobre en el mundo (Es fácil corroborar este dato en internet).</li>
+<li>Delgadez de un 0.1% mínimo: No puede existir una población con más de un 99.9% de la población no delgada.</li>
+<li>Número de años en educación de 0: No puede haber en promedio 0 años de educación </li>
+</ul>
+<h3 id="manejo-de-outliers">Manejo de outliers</h3>
+<p>Dada esta vista general, es que con un poco de investigación en 
+internet, podemos decidir rangos arbitrarios en los cuales no 
+consideremos datos como outliers.</p>
+<ul>
+<li>Mortalidad infantil de mínimo 1</li>
+<li>BMI entre 10 y 60</li>
+<li>GDP mayor a 200 dolares (Según las estadísticas, Burundi es el pais con menos PBI con un total de 253 dolares)</li>
+<li>Delgadez mayor a 0.5%.</li>
+<li>Porcentaje de educación mayor a 1 año.</li>
+</ul>
+<p>Ya que los nombres de las columnas vienen todos desestandarizados, es
+ que vamos a quitar todos los espacios en ellos y cambiar aquellos 
+espacios intermedios en los nombres por "_". Luego, aplicaremos 
+funciones lambda marcar los datos que consideramos outliers como 
+outliers (los marcamos como NaN).</p>
+<pre><code class="hljs python language-python">orig_cols = list(dataset.columns)
+new_cols = []
+<span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> orig_cols:
+    new_cols.append(col.strip().replace(<span class="hljs-string">'  '</span>, <span class="hljs-string">' '</span>).replace(<span class="hljs-string">' '</span>, <span class="hljs-string">'_'</span>).lower())
+dataset.columns = new_cols
+
+dataset[<span class="hljs-string">'infant_deaths'</span>] = dataset[<span class="hljs-string">'infant_deaths'</span>].replace(<span class="hljs-number">0</span>, np.nan)
+dataset.bmi = dataset.apply(<span class="hljs-keyword">lambda</span> x: np.nan <span class="hljs-keyword">if</span> (x.bmi &lt; <span class="hljs-number">10</span> <span class="hljs-keyword">or</span> x.bmi &gt; <span class="hljs-number">50</span>) <span class="hljs-keyword">else</span> x.bmi, axis=<span class="hljs-number">1</span>)
+dataset[<span class="hljs-string">'gdp'</span>] = dataset.apply(<span class="hljs-keyword">lambda</span> x: np.nan <span class="hljs-keyword">if</span> (x[<span class="hljs-string">'gdp'</span>] &lt; <span class="hljs-number">200</span>) <span class="hljs-keyword">else</span> x[<span class="hljs-string">'gdp'</span>], axis=<span class="hljs-number">1</span>)
+dataset[<span class="hljs-string">'thinness_1-19_years'</span>] = dataset.apply(<span class="hljs-keyword">lambda</span> x: np.nan <span class="hljs-keyword">if</span> (x[<span class="hljs-string">'thinness_1-19_years'</span>] &lt; <span class="hljs-number">0.5</span>) <span class="hljs-keyword">else</span> x[<span class="hljs-string">'thinness_1-19_years'</span>], axis=<span class="hljs-number">1</span>)
+dataset[<span class="hljs-string">'thinness_5-9_years'</span>] = dataset.apply(<span class="hljs-keyword">lambda</span> x: np.nan <span class="hljs-keyword">if</span> (x[<span class="hljs-string">'thinness_5-9_years'</span>] &lt; <span class="hljs-number">0.5</span>) <span class="hljs-keyword">else</span> x[<span class="hljs-string">'thinness_5-9_years'</span>], axis=<span class="hljs-number">1</span>)
+dataset[<span class="hljs-string">'schooling'</span>] = dataset[<span class="hljs-string">'schooling'</span>].replace(<span class="hljs-number">0</span>, np.nan)
+</code></pre>
+<p>Luego, podemos correr la función descriptiva nuevamente para 
+verificar los cambios realizados. Ahora que marcamos aquellos datos 
+outliers como datos faltantes, vamos a hacer una vista general de la 
+cantidad de datos faltantes en el dataset.</p>
+<pre><code class="hljs python language-python">dataset.info()
+</code></pre>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp4.png"></p>
+<p>Sabiendo que el total son 2938 datos, vemos como casi todas las 
+columnas tienen menos de 30% de los valores como faltantes, exceptuando 
+bmi, el cual tiene casi un 50% de los valores faltantes. Con este dato, 
+podríamos comprometer el análisis ya que deberemos inferir los valores 
+de la mitad de sus filas en el arreglo de los faltantes, por lo que se 
+toma la decisión de eliminar dicha columna.</p>
+<pre><code class="hljs python language-python">dataset.drop(columns=<span class="hljs-string">'bmi'</span>, inplace=<span class="hljs-literal">True</span>)
+</code></pre>
+<h3 id="arreglo-de-datos-faltantes">Arreglo de datos faltantes</h3>
+<p>Para arreglar los datos faltantes, vamos a reemplazar, tanto los que 
+marcamos en el paso anterior como los datos que ya estaban en el dataset
+ con el promedio del resto de los datos para cada columna.</p>
+<p>Primero, utilizaremos esta funcionalidad de pandas para ver cuales son los atributos con datos faltantes:</p>
+<pre><code class="hljs python language-python">print(<span class="hljs-string">"Datos faltantes dataset:"</span>)
+print(pd.isnull(dataset).sum()) 
+</code></pre>
+<p>De este modo, arreglamos los datos faltantes para cada fila que los tenga.</p>
+<pre><code class="hljs python language-python">dataset[<span class="hljs-string">"life_expectancy"</span>].fillna(dataset[<span class="hljs-string">"life_expectancy"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"adult_mortality"</span>].fillna(dataset[<span class="hljs-string">"adult_mortality"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"infant_deaths"</span>].fillna(dataset[<span class="hljs-string">"infant_deaths"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"alcohol"</span>].fillna(dataset[<span class="hljs-string">"alcohol"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"hepatitis_b"</span>].fillna(dataset[<span class="hljs-string">"hepatitis_b"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"polio"</span>].fillna(dataset[<span class="hljs-string">"polio"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"total_expenditure"</span>].fillna(dataset[<span class="hljs-string">"total_expenditure"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"diphtheria"</span>].fillna(dataset[<span class="hljs-string">"diphtheria"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"gdp"</span>].fillna(dataset[<span class="hljs-string">"gdp"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"population"</span>].fillna(dataset[<span class="hljs-string">"population"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"thinness_1-19_years"</span>].fillna(dataset[<span class="hljs-string">"thinness_1-19_years"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"thinness_5-9_years"</span>].fillna(dataset[<span class="hljs-string">"thinness_5-9_years"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"income_composition_of_resources"</span>].fillna(dataset[<span class="hljs-string">"income_composition_of_resources"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+dataset[<span class="hljs-string">"schooling"</span>].fillna(dataset[<span class="hljs-string">"schooling"</span>].median(), inplace = <span class="hljs-literal">True</span>)
+</code></pre>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp5.png"></p>
+<h2 id="analisis-de-los-datos">Analisis de los datos</h2>
+<p>Para comenzar este análisis, vamos a graficar lo más importante para 
+visualizar esta data, la esperanza de vida en función de cada uno de los
+ atributos.</p>
+<pre><code class="hljs python language-python">plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">20</span>))
+<span class="hljs-keyword">for</span> i, col <span class="hljs-keyword">in</span> enumerate(list(dataset.columns)[<span class="hljs-number">1</span>:], <span class="hljs-number">1</span>):
+    plt.subplot(<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, i)
+    plt.plot(  dataset_clean[col], dataset_clean[<span class="hljs-string">'life_expectancy'</span>], <span class="hljs-string">'bo'</span>, markersize=<span class="hljs-number">1</span>)
+    plt.title(col)
+</code></pre>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp6.png"></p>
+<p>Debido al ruido de los datos, es bastante difícil ver relaciones 
+entre algunos de los datos. Sin embargo otros, muestran tendencias 
+bastante correlacionadas con lo sabido del tema:</p>
+<ul>
+<li>Los países desarrollados tienen expectativas de vida superiores a 
+los 70 años, a diferencia de los no desarrollados que varían entre 40 y 
+90.</li>
+<li>En "percentage_expenditure", vemos como los países con mayores 
+gastos en salud, tienen esperanzas de vida muy superiores en general.</li>
+<li>En la gráfica de "schooling" vemos como más años de educación 
+equivalen a mayores esperanzas de vida (probablemente correlacionado a 
+países mejor desarrollados)</li>
+<li>Los países con mayor tasa de muertes por HIV tienen menor esperanza 
+de vida, de lo cual se infiere niveles bajos de educación sexual o falta
+ de recursos.</li>
+<li>Países con mayores GDP (PBI, Producto bruto interno), tienen mejores esperanzas de vida a mayor cantidad.</li>
+<li>En la gráfica de polio, se puede apreciar como a mayores niveles de 
+vacunación, hay mayores niveles de esperanza de vida. Mismo 
+comportamiento que en la gráfica de vacunación contra la hepatitis B.</li>
+<li>La gráfica de "Income composition of resouces", es decir, que tan 
+productivo uso hacen los países de sus recursos, muestra como a mayor 
+índice, mayores niveles de vida.</li>
+</ul>
+<p>De las observaciones anteriores, quizas podríamos generalizar 
+diciendo que los factores que más afectan a la esperanza de vida, son 
+los económicos y los de prevención en salud. <br>
+A continuación, crearemos una matriz de correlación para poder sacar mayores conclusiones.</p>
+<pre><code class="hljs python language-python">plt.figure(figsize=(<span class="hljs-number">20</span>,<span class="hljs-number">15</span>))
+sns.heatmap(dataset.corr(), square=<span class="hljs-literal">True</span>, annot=<span class="hljs-literal">True</span>, linewidths=<span class="hljs-number">.5</span>, cmap=<span class="hljs-string">"Oranges"</span>)
+plt.title(<span class="hljs-string">"Matriz de correlación"</span>)
+plt.show()
+</code></pre>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp12.png"></p>
+<p>Viendo la segunda columna o la segunda fila, podemos analizar la 
+correlación de los atributos con la salida, life_expectancy. 
+Curiosamente, vemos como los factores con mayor correlación son aquellos
+ relacionados a lo económico y la salud, como habíamos visto antes.</p>
+<p>Los que más destacan son:</p>
+<ul>
+<li>Correlación con schooling: 74%, como mencionamos anteriormente, 
+quizas no es el hecho de tener educación sino que el haber educación es 
+una consecuencia de la economía y por tanto, la correlación está más 
+basada en el estado de desarrollo del país.</li>
+<li>Income composition of resources: 69%, tal cual hablamos 
+anteriormente, la economía de un país impacta enormemente en la 
+esperanza de vida, ya que a mejor uso de recursos, mayor inversión es 
+hospitales y salud en general.</li>
+<li>GDP: 42%, misma conclusión que la anterior, mas dinero implica más gastos en salud.</li>
+<li>Polio(vacunacion): 46%, el mayor uso de vacunas para estas enfermedades mortales obviamente disminuye el riesgo de muerte.</li>
+<li>Diftería(vacunación):  47%,. misma conclusión que la anterior.</li>
+</ul>
+<p>Además, podemos ver correlaciones inversas (cuando una decrece, la 
+otra crece y viceversa) grandes en los aspectos más relacionados a la 
+muerte:</p>
+<ul>
+<li>HIV con -56%, implicando que a mayores muertes en un país por SIDA, 
+mayores muertes en general. Implicación de la falta de educación en 
+países subdesarrollados.</li>
+<li>Mortalidad adulta: -70%. Esta estadística es obvia que influya tanto
+ ya que la mayoría de los seres humanos estan compuestos por adultos 
+(+18), lo cual hace que el hecho de tener una alta mortalidad adulta 
+implique una alta mortalidad general.</li>
+</ul>
+<p>Finalmente, este dataset trae algunos datos curiosos que van en contra de lo que uno podría concluir en la teoría:</p>
+<ul>
+<li><p>Consumo de alcohol: 39%. Al ser una correlación positiva, indica 
+que los consumos medios/altos de alcohol, podrían tener consecuencias 
+positivas en la esperanza de vida. Si revisamos en las gráficas 
+anteriores, vemos como este es el caso para los consumos medios de 
+alcohol. Quizás, podemos concluir que tiene que ver con su propiedad 
+antiscéptica, es decir, su uso para combatir infecciones.</p></li>
+<li><p>Población: -0.29%. La población en si, no tiene ningun efecto en 
+la esperanza de vida de las personas de un país. A veces uno piensa que 
+la distribución de recursos va en cuanto a la gente que hay en un país 
+ya que a menos personas menos producción pero también hay que considerar
+ que eso implica menor consumo, lo cual hace que haya un balance entre 
+producción y consumo en la mayoría de los países. Por lo tanto, la 
+población en si como factor, afecta mínimamente en la esperanza de vida 
+de una persona.</p></li>
+</ul>
+<h2 id="modelado">Modelado</h2>
+<h3 id="preparación-de-modelado">Preparación de modelado</h3>
+<p>Para el modelado, utilizaremos Rapidminer. Primero que nada, 
+exportamos los datos preprocesados en python utilizando la función de 
+Pandas para guardar un dataframe como csv.</p>
+<pre><code class="hljs python language-python">dataset.to_csv(<span class="hljs-string">"./Life Expectancy Clean.csv"</span>)
+</code></pre>
+<p>Luego de tener el CSV, nos vamos a Rapidminer, donde importaremos el 
+CSV como un archivo delimitado por comas. Si ocurre que aparece una 
+columna extra "atr1" conteniendo el número de fila de cada una, lo 
+eliminaremos ya que no nos servirá en nuestro análisis. </p>
+<p>Una vez importado el proceso, deberemos realizar algunas modificaciones para preparar el modelado:</p>
+<ul>
+<li><p>Agregar un bloque Discretize by user input, esto nos permitirá 
+redefinir datos numéricos como datos polinomiales. En este caso la 
+salida de nuestro modelo será la esperanza de vida, el problema surge en
+ que un modelo no puede tener una salida numérica ya que implicaría una 
+clase por número y es muy raro que estos se repitan. Este bloque nos 
+permitirá definir rangos de números como clases para nuestro modelo. En 
+este ejemplo, se define de la siguiente manera cada clase:</p>
+<ul>
+<li>Low expectancy (Baja esperanza de vida): upper limit: 60 años.</li>
+<li>Mid expectancy (Esperanza media de vida): upper limit: 80 años.</li>
+<li>High expectancy (Alta esperanza de vida): upper limit: 100 años.</li></ul></li>
+<li><p>Un bloque Set role para marcar la transformada columna "life expectancy" en nuestra label (salida).</p></li>
+<li><p>Un bloque Normalize para normalizar nuestros datos que resultan 
+ser todos numéricos. Usaremos el método "Range transformation" y lo 
+haremos entre 0 y 1.</p></li>
+</ul>
+<h3 id="creación-de-modelos">Creación de modelos</h3>
+<p>En este caso de estudio, se opta por el uso de la técnica de 
+ensambles para crear modelos. Esta técnica se presenta como el uso en 
+colaboración de varios modelos distintos que se entrenen con la data de 
+entrada y en conjunto luego, tomen decisiones en base a la clasificacion
+ de la misma. </p>
+<p>Crearemos ensambles con tres técnicas distintas:</p>
+<ul>
+<li><p>Bagging: Técnica basada en el uso de la selección aleatoria de un
+ porcentaje de la data de entrenamiento en varios modelos distintos con 
+el fin de luego crear una salida conjunta en la cual se decida la salida
+ final basada en la media de las decisiones de todos los modelos. Como 
+técnica es buena cuando se tiene conjuntos de entrenamiento grandes, su 
+problema radica en que usa siempre las mismas caracteríticas (atributos)
+ en sus modelos, lo cual lo hace débil con datasets con muchas features.</p></li>
+<li><p>Boosting: Boosting busca eliminar los problemas de la técnica de 
+Bagging. La diferencia radica en que luego de entrenar un modelo, este 
+marca aquellas entradas del dataset que no puedo clasificar 
+correctamente o que tuvo dificultades para decidir su clase. De este 
+modo, les da un cierto peso que hace que el siguiente modelo que tome 
+datos al azar del dataset, tenga más probabilidad de tomar aquellos que 
+fueron marcados por el modelo anterior. Asimismo, en cada iteración se 
+entrenan todos los modelos con el dataset tomado en esa iteración, es 
+decir, una vez que el modelo 1 marca las entradas con más peso y el 
+modelo 2 selecciona su conjunto de entrenamiento basado en esa 
+información, el modelo 1 y el 2 son entrenados con el conjunto elegido 
+por el 2. Luego de ser entrenados y testeados, generan una salida en 
+conjunto al igual que Bagging y además marcan aquellas entradas que 
+ahora fueron mal clasificadas para que usen el siguiente modelo y los 
+anteriores. La técnica aumenta mucho más la performance permitiendo 
+entrenar modelos con mayor diversidad, reduciendo significativamente el 
+overfitting.</p></li>
+<li><p>Random Forest: Al igual que boosting, es una técnica basada en 
+Bagging pero además de datos aleatorios, utiliza atributos aleatorios. 
+Además, esta se implementa con decision trees exclusivamente, de ahí su 
+nombre. La ventaja que tiene sobre el resto es la parte de los atributos
+ aleatorios. Supongamos que creamos modelos con las técnicas anteriores 
+utilizando árboles de decisión. En los casos de ambas técnicas, como 
+siempre utilizan los mismos atributos, es muy probable que la gran 
+mayoría de los árboles creados terminen siendo iguales o con un 
+comportamiento muy similar. En random forest, esto no ocurre, ya que al 
+randomizar los atributos utilizados en cada submodelo, impedimos que los
+ árboles se construyan de igual manera, además de hacer al modelo final 
+virtualmente inmune al overfitting. Reduce enormemente la correlación 
+entre los árboles creados.s</p></li>
+</ul>
+<p>Al final de este artículo, se encontrará un link al proceso de Rapidminer completo para poder visualizarlo y ajustarlo.</p>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp7.png"></p>
+<h3 id="resultados">Resultados</h3>
+<p>Con el fin de estudiar el comportamiento de los algoritmos descritos 
+anteriormente, es que se decide entrenar al modelo con las tres 
+técnicas, en todas, utilizando árboles de decisión.</p>
+<p>Se corren Bagging y Boosting con 50 iteraciones cada uno y Random 
+Forest, debido a su naturaleza de no provocar overfitting, con 1000. 
+Todos se corren con la misma semilla de Rapidminer para asegurar que 
+todos tengan las mismas condiciones iniciales.</p>
+<p>Resultados Bagging:</p>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp8.png"></p>
+<p>Resultados Boosting:</p>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp9.png"></p>
+<p>Resultados Random Forest:</p>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp10.png"></p>
+<p>Como podemos ver, los resultados indican lo visto en la teoría, 
+Bagging es el que se comporta peor de los tres y Boosting y Random 
+Forest al hacer esas modificaciones randómicas llegan a mucho mayores 
+porcentajes de acierto en el conjunto de test. Asimismo se ve como 
+Random forest tiene un poco más de performance que Bagging, 
+probablemente por el hecho mencionado anteriormente del uso de 
+atributos. </p>
+<h3 id="mejoras">Mejoras</h3>
+<p>Con el fin de simplificar este modelado, se utilizaron casi todas las
+ opciones por default en todos los bloques de modelado mencionados. 
+Ahora que tenemos el de mejor rendimiento, podemos utilizar el bloque de
+ optimize parameters grid. Esto nos permitirá que Rapidminer cree y 
+pruebe un conjunto acotado de configuraciones del bloque y devuelva 
+aquella configuración con la mayor performance. En este caso, variaremos
+ el número de iteraciones del modelo y el uso de podado en los árboles 
+de decisión (Este proceso es muy pesado en la CPU, dependiendo de cual 
+se usa, puede tardar de minutos a horas).</p>
+<p>Resultados Mejora:</p>
+<p><img src="CasoDeEstudioLifeExpectancy_files/lifeexp11.png"></p>
+<p>Los resultados resultaron ser un poco mejores que el modelo anterior,
+ esto se logró con el uso de 3000 árboles (iteraciones) y sin la 
+utilización de podado. Esto parece indicar que el uso de más árboles 
+mejora la decisión, sin embargo, luego se hace una prueba con 5000 
+árboles y genera los mismos resultados. Esto quiere decir que en un 
+principio se utilizó pocos árboles y que la cantidad, por lo menos para 
+este dataset y modelo, debe superar los 3000 árboles. </p>
+<h2 id="conclusiones">Conclusiones</h2>
+<ul>
+<li>Se hacen preparaciones de data basados en la teoría detras de la 
+ingeniería de datos y en suposiciones realizadas en cuanto a lo sabido 
+del universo del dataset.</li>
+<li>Se hace un análisis de los datos finales y se realizan conclusiones sobre los datos presentados.</li>
+<li>Utiilizando el método de ensambles, logramos crear un modelo con un 
+96% de certeza en la clasificación de datos nuevos, lo cual nos permite 
+en un futuro poder predecir la esperanza de vida de un país dado un 
+conjunto de atributos.</li>
+</ul>
+<h2 id="referencias">Referencias</h2>
+<ul>
+<li><a href="https://colab.research.google.com/drive/1Cef9XsvX8R7Dfb7y2uFB03AiSl3KutJg?usp=sharing">Código completo de la solución</a></li>
+<li><a href="https://www.kaggle.com/shabanamir/ds-project-life-expectancy-who">Dataset utilizado</a></li>
+<li><a href="https://github.com/aparedes1998/aparedes1998.github.io/blob/master/Files/Life%20expectancy%20process%20dataset.rmp">Proceso en Rapidminer</a></li>
+</ul>
+          </div>
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+body {
+  color: #dcdcdc;
+  background-color: #0d1117;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+body > #content {
+  text-align: justify;
+  font-kerning: normal;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  margin-top: 2%;
+  max-width: 900px;
+  border: 1px solid #555555;
+  padding: 10px 40px;
+  padding-bottom: 20px;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Poppins";
+  color: #dcdcdc;
+}
+
+hr {
+  color: #bbb;
+  background-color: #bbb;
+  height: 1px;
+  flex: 0 1 auto;
+  margin: 1em 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  * Links
+  */
+#content a {
+  color: #0366d6;
+  text-decoration: none; }
+  #content a:visited {
+    color: #0366d6; }
+  #content a:hover {
+    color: #0366d6;
+    text-decoration: underline; }
+pre {
+  background-color: #161b22;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  word-wrap: break-word;
+  padding: .2em .4em;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+}
+
+pre > code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+  font-size: 100%;
+  white-space: pre-wrap;
+}
+
+
+/**
+  * Blockquotes
+  */
+blockquote {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+  border-left-width: 3px;
+  padding: 0 1em;
+  color: #828282;
+  border-left: 4px solid #e8e8e8;
+  padding-left: 15px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+blockquote * {
+  font-style: normal !important;
+  letter-spacing: 0;
+  color: #6a737d !important;
+}
+
+/**
+  * Tables
+  */
+table {
+  border-spacing: 2px;
+  display: block;
+  font-size: 14px;
+  overflow: auto;
+  width: 100%;
+  margin-bottom: 16px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+/**
+  * Others
+  */
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+p {
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #dcdcdc; }
+
+#content ul {
+  margin-top: 0; }
+
+
+#content li {
+  color: #dcdcdc;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5; }
+
+#content li + #content li {
+  margin-top: 0.25em; }
+
+
+
+  #content a:visited {
+  color: #0366d6; }
+
+h1, h2, h3 {
+  border-bottom: 1px solid #555555;
+  color: #dcdcdc;
+  /* Darker */ }
+
+header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 100px;
+    background: #161b22;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header .logo
+{
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    float: left;
+    font-weight: bold;
+}
+
+header nav 
+{
+    float: right;
+
+}
+
+header nav ul
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li
+{
+    list-style: none;
+}
+
+header nav ul li a
+{
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+header nav ul li a:hover
+{
+    color: #fff;
+    background-color: #2196f3;
+}
+
+.menu-toggle
+{
+    color: #fff;
+    float: right;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 991px)
+{
+    header
+    {
+        padding: 0 20px;
+        z-index: 1;
+    }
+    .menu-toggle
+    {
+        display: block;
+        margin-top: 13;
+    }
+    header nav
+    {
+        position: absolute;
+        width: 100%;
+        height: calc(100vh - 50px);
+        background: #333;
+        top: 50px;
+        left: -100%;
+        transition: 0.5s;
+    }
+    header nav.active
+    {
+        left: 0;
+    }
+    header nav ul
+    {
+        display: block;
+        text-align: center;
+    }
+
+    header nav ul li a 
+    {
+        border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+
+    pre > code {      
+      font-size: 55%;
+    }
+    
+}
+</style>
+          <style type="text/css">/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #c9d1d9;
+  background: #161b22;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #6aa94f;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #569cd6;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #dcdcaa;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+</style>
+        
+      </body></html>
