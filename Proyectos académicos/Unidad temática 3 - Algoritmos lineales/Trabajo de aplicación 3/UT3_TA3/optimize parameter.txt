@@ -1,0 +1,1 @@
+Cómo puedo saber cual es la mejor combinacion de configuraciones para los algoritmos de entrenamiento como árboles de decisión? Utilizar el bloque optimize 
