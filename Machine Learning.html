@@ -1,157 +1,268 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Machine Learning</title>
-        <meta charset="utf8" />  
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
-        <link href="MLstyle.css" type="text/css" rel="stylesheet"  />
-    </head>
-    <body>
-        <header>
-            <div class="logo">AGUSTIN PAREDES</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="Machine Learning.html">Machine Learning</a></li>
-                    <li><a href="#">Proximamente ...</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" onclick="show()"><i class="fa fa-bars" aria-hidden="true"></i></div>
-        </header>
-        <script>
-            function show(){
-                let toggle = document.querySelector('.menu-toggle');
-                let navigation= document.querySelector('nav');
-                navigation.classList.toggle('active');
-            }
-        </script> 
-        <div class="container">
-       
-            <section class="cards-wrapper">
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/Introduccion a machine learning.html" style="--bg-img: url('Machine Learning/Images/introml.jpg')">
-                    <div>
-                      <h1>Introducción a Machine Learning</h1>
-                      <p>Todos hemos escuchado los conceptos de “Machine Learning”, “Inteligencia Artificial” y ...</p>
-                      <div class="date">16 Ago 2021</div>
-                      <div class="tags">
-                        <div class="tag">Conceptos</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/Herramientas.html" style="--bg-img: url('Machine Learning/Images/tools.jpeg')">
-                    <div>
-                      <h1>Herramientas para trabajar con datos</h1>
-                      <p>¿Qué se busca a la hora de elegir una herramienta para en análisis de...</p>
-                      <div class="date">22 Ago 2021</div>
-                      <div class="tags">
-                        <div class="tag">Conceptos</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/Caso de estudio Dataset Iris.html" style="--bg-img: url('Machine Learning/Images/iris.jpg')">
-                    <div>
-                      <h1>Caso de estudio: Dataset Iris</h1>
-                      <p>En este caso de estudio, vamos a ver el uso del lenguaje Python con...</p>
-                      <div class="date">29 Ago 2021</div>
-                      <div class="tags">
-                        <div class="tag">Data Analysis</div>
-                        <div class="tag">Python</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/Preparacion de datos.html" style="--bg-img: url('Machine Learning/Images/clean_data.jpg')">
-                    <div>
-                      <h1>Preparación de datos previo a estudio</h1>
-                      <p>Hasta ahora, hemos visto como el análisis de los…</p>
-                      <div class="date">05 Sep 2021</div>
-                      <div class="tags">
-                        <div class="tag">Conceptos</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/CasoDeEstudioTitanic.html" style="--bg-img: url('Machine Learning/CasoDeEstudioTitanic_files/analisistitanic.jpg')">
-                    <div>
-                      <h1>Caso de estudio: Dataset Titanic</h1>
-                      <p>En este caso de estudio, vamos a ver el uso del lenguaje Python...</p>
-                      <div class="date">11 Sep 2021</div>
-                      <div class="tags">
-                        <div class="tag">Data Analysis</div>
-                        <div class="tag">Python</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/Algoritmos Lineales Regresion lineal.html" style="--bg-img: url('Machine Learning/Images/linalg.png')">
-                    <div>
-                      <h1>Algoritmos lineales: Regresión lineal</h1>
-                      <p>En Machine learning, existen distintos tipos de algoritmos...</p>
-                      <div class="date">01 Oct 2021</div>
-                      <div class="tags">
-                        <div class="tag">Machine Learning</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/Algoritmos no Lineales.html" style="--bg-img: url('Machine Learning/Images/nonlinalg.png')">
-                    <div>
-                      <h1>Algoritmos no lineales</h1>
-                      <p>La diferencia fundamental entre los algoritmos lineales y los...</p>
-                      <div class="date">11 Oct 2021</div>
-                      <div class="tags">
-                        <div class="tag">Machine Learning</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/CasoDeEstudioLifeExpectancy.html" style="--bg-img: url('Machine Learning/CasoDeEstudioLifeExpectancy_files/lifeexp1.jpg')">
-                    <div>
-                      <h1>Caso de estudio: Dataset Life Expectancy</h1>
-                      <p>Durante toda la existencia de la humanidad, las personas se han obsesionado con un único objetivo...</p>
-                      <div class="date">22 Oct 2021</div>
-                      <div class="tags">
-                        <div class="tag">Machine Learning</div>
-                        <div class="tag">Data Analysis</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-grid-space">
-                  <div class="num"></div>
-                  <a class="card" href="Machine Learning/ClusteringMall.html" style="--bg-img: url('Machine Learning/Images/clustering.png')">
-                    <div>
-                      <h1>Clustering - Dataset Mall Customer Segmentation Data</h1>
-                      <p>En Machine Learning, existen dos tipos de aprendizaje, el supervisado y el no supervisado...</p>
-                      <div class="date">01 Nov 2021</div>
-                      <div class="tags">
-                        <div class="tag">Machine Learning</div>
-                        <div class="tag">Clustering</div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </section>
-            
+  <head>
+    <title>Machine Learning</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="MLstyle.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">AGUSTIN PAREDES</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Machine Learning.html">Machine Learning</a></li>
+          <li><a href="#">Proximamente ...</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle" onclick="show()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+    <script>
+      function show() {
+        let toggle = document.querySelector(".menu-toggle");
+        let navigation = document.querySelector("nav");
+        navigation.classList.toggle("active");
+      }
+    </script>
+    <div class="container">
+      <section class="intro">
+        <div class="title">
+          <h2>Portfolio de machine learning</h2>
+          <p></p>
         </div>
-    </body>
+      </section>
+      <section class="cards-wrapper">
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/Introduccion a machine learning.html"
+            style="--bg-img: url('Machine Learning/Images/introml.jpg')"
+          >
+            <div>
+              <h1>Introducción a Machine Learning</h1>
+              <p>
+                Todos hemos escuchado los conceptos de “Machine Learning”,
+                “Inteligencia Artificial” y ...
+              </p>
+              <div class="date">16 Ago 2021</div>
+              <div class="tags">
+                <div class="tag">Conceptos</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/Herramientas.html"
+            style="--bg-img: url('Machine Learning/Images/tools.jpeg')"
+          >
+            <div>
+              <h1>Herramientas para trabajar con datos</h1>
+              <p>
+                ¿Qué se busca a la hora de elegir una herramienta para en
+                análisis de...
+              </p>
+              <div class="date">22 Ago 2021</div>
+              <div class="tags">
+                <div class="tag">Conceptos</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/Caso de estudio Dataset Iris.html"
+            style="--bg-img: url('Machine Learning/Images/iris.jpg')"
+          >
+            <div>
+              <h1>Caso de estudio: Dataset Iris</h1>
+              <p>
+                En este caso de estudio, vamos a ver el uso del lenguaje Python
+                con...
+              </p>
+              <div class="date">29 Ago 2021</div>
+              <div class="tags">
+                <div class="tag">Data Analysis</div>
+                <div class="tag">Python</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/Preparacion de datos.html"
+            style="--bg-img: url('Machine Learning/Images/clean_data.jpg')"
+          >
+            <div>
+              <h1>Preparación de datos previo a estudio</h1>
+              <p>Hasta ahora, hemos visto como el análisis de los…</p>
+              <div class="date">05 Sep 2021</div>
+              <div class="tags">
+                <div class="tag">Conceptos</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/CasoDeEstudioTitanic.html"
+            style="
+              --bg-img: url('Machine Learning/CasoDeEstudioTitanic_files/analisistitanic.jpg');
+            "
+          >
+            <div>
+              <h1>Caso de estudio: Dataset Titanic</h1>
+              <p>
+                En este caso de estudio, vamos a ver el uso del lenguaje
+                Python...
+              </p>
+              <div class="date">11 Sep 2021</div>
+              <div class="tags">
+                <div class="tag">Data Analysis</div>
+                <div class="tag">Python</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/Algoritmos Lineales Regresion lineal.html"
+            style="--bg-img: url('Machine Learning/Images/linalg.png')"
+          >
+            <div>
+              <h1>Algoritmos lineales: Regresión lineal</h1>
+              <p>
+                En Machine learning, existen distintos tipos de algoritmos...
+              </p>
+              <div class="date">01 Oct 2021</div>
+              <div class="tags">
+                <div class="tag">Machine Learning</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/Algoritmos no Lineales.html"
+            style="--bg-img: url('Machine Learning/Images/nonlinalg.png')"
+          >
+            <div>
+              <h1>Algoritmos no lineales</h1>
+              <p>
+                La diferencia fundamental entre los algoritmos lineales y los...
+              </p>
+              <div class="date">11 Oct 2021</div>
+              <div class="tags">
+                <div class="tag">Machine Learning</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/CasoDeEstudioLifeExpectancy.html"
+            style="
+              --bg-img: url('Machine Learning/CasoDeEstudioLifeExpectancy_files/lifeexp1.jpg');
+            "
+          >
+            <div>
+              <h1>Caso de estudio: Dataset Life Expectancy</h1>
+              <p>
+                Durante toda la existencia de la humanidad, las personas se han
+                obsesionado con un único objetivo...
+              </p>
+              <div class="date">22 Oct 2021</div>
+              <div class="tags">
+                <div class="tag">Machine Learning</div>
+                <div class="tag">Data Analysis</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="card-grid-space">
+          <div class="num"></div>
+          <a
+            class="card"
+            href="Machine Learning/ClusteringMall.html"
+            style="--bg-img: url('Machine Learning/Images/clustering.png')"
+          >
+            <div>
+              <h1>Clustering - Dataset Mall Customer Segmentation Data</h1>
+              <p>
+                En Machine Learning, existen dos tipos de aprendizaje, el
+                supervisado y el no supervisado...
+              </p>
+              <div class="date">01 Nov 2021</div>
+              <div class="tags">
+                <div class="tag">Machine Learning</div>
+                <div class="tag">Clustering</div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+      <section class="extra">
+        <div class="title">
+          <h2>Proyectos académicos</h2>
+        </div>
+        <div class="extraContent">
+          Te invito a ver mis proyectos académicos donde trato todos los temas
+          vistos en los casos de estudio anteriores en áreas específicas. Estos
+          proyectos incluyen algoritmos y temas como:
+          <br />
+          <br />
+          <ul>
+            <li>
+              Preparación de datos: Normalizacion, detección de outliers,
+              eliminación y transformación de datos faltantes.
+            </li>
+            <li>
+              Uso de algoritmos no lineales y sus comparaciones: SVM, Árboles de
+              clasificacion, K-NN, Naive Bayes.
+            </li>
+            <li>
+              Visualización de métodos de Clustering (Aprendizaje no
+              supervisado): K-means, DBSCAN, PCA.
+            </li>
+            <li>Ensambles.</li>
+            <li>
+              Y muchos más ejemplos en Excel, Rapidminer y en Python con sus
+              respectivos procesos para descargar.
+            </li>
+          </ul>
+          <a
+            href="https://github.com/aparedes1998/aparedes1998.github.io/tree/master/Proyectos%20acad%C3%A9micos"
+            class="btn"
+          >
+            Proyectos academicos</a
+          >
+        </div>
+      </section>
+    </div>
+  </body>
 </html>
