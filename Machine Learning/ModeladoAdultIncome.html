@@ -1,0 +1,583 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Evaluacion de modelos: Adult Income</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">AGUSTIN PAREDES</div>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../Machine Learning.html">Machine Learning</a></li>
+          <li><a href="#">Proximamente ...</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle" onclick="show()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+    <script>
+      function show() {
+        let toggle = document.querySelector(".menu-toggle");
+        let navigation = document.querySelector("nav");
+        navigation.classList.toggle("active");
+      }
+    </script>
+    <div id="content">
+      <h1 id="adult-income-dataset">
+        Evaluacion de modelos: Adult income dataset
+      </h1>
+      <p><img src="ModeladoAdultIncome_files/adult1.jpg" /></p>
+      <p>
+        El Census Bureau de EEUU realizó un censo en 1994 de una porción variada
+        de la población adulta donde se especifican factores socioeconómicos de
+        la persona y sus ingresos anuales. Como objetivo de este análisis es
+        utilizar esos datos y lograr predecir, dada una nueva persona X, si su
+        ingreso anual sería mayor o menor a 50000 dólares (Que ajustado por
+        inflación, serían unos
+        <a href="https://www.officialdata.org/us/inflation/1994?amount=50000"
+          >93,000 dólares</a
+        >, un buen sueldo). Integraremos el uso de curvas ROC en este análisis
+        para comparar modelos.
+      </p>
+      <h2 id="dataset">Dataset</h2>
+      <p>
+        El dataset está conformado por 32561 filas y 15 columnas (siendo una la
+        salida del modelo).
+      </p>
+      <ul>
+        <li>age: Edad de la persona.</li>
+        <li>
+          workclass: Sector privado, Trabajo para el gobierno estatal, trabajo
+          para el govierno federal o independiente.
+        </li>
+        <li>
+          fnlwgt: Final weight, un índice creado para representar las
+          características socioeconómicas de las personas para decidir su
+          selección en el censo.
+        </li>
+        <li>
+          education: Último grado de educación (No graduado, Graduado de escuela
+          media, bachiller, universitario, doctorado, master, etc).
+        </li>
+        <li>education.num: Años de estudio aprobados.</li>
+        <li>
+          marital.status: Estado civil (divorciado, separado, casado, nunca
+          casado, viudo).
+        </li>
+        <li>occupation: Ocupación, trabajo.</li>
+        <li>
+          relationship: Sin familia actualmente, no casado, esposo, esposa,
+          tiene un hijo.
+        </li>
+        <li>race: Raza (negro, blanco, asiático).</li>
+        <li>sex: Sexo (masculino, femenino).</li>
+        <li>capital.gain: Ganancia capital.</li>
+        <li>capital.loss: Pérdida capital.</li>
+        <li>hours.per.week: Horas trabajadas a la semana.</li>
+        <li>native.country: País de nacimiento.</li>
+        <li>income: Ingreso anual (Dos valores, &lt; 50000 y &gt;= 50000).</li>
+      </ul>
+      <h2 id="analisis">Analisis</h2>
+      <p>
+        Este análisis va a ser realizado utilizando la herramienta rapidminer ya
+        que es sencilla y este dataset en particular no necesita tantas
+        transformaciones.
+      </p>
+      <h3 id="preparación-de-datos">Preparación de datos</h3>
+      <p>
+        Cargamos los datos en Rapidminer y en principio, eliminaremos
+        "education" ya que este y "education.num" dicen lo mismo de los datos
+        pero uno de ellos lo dice con una variable continua, la cual nos sirve
+        como cuantificación. Además, eliminaremos "relationship" ya que sus
+        valores representan lo mismo que "marital.status". Esto se realizará con
+        un bloque "Select Attributes".
+      </p>
+      <p>
+        A continuación, aplicamos un bloque "Replace missing values" para
+        reemplazar todo dato faltante con la media de los datos. Por último,
+        agregamos un bloque "Set role" donde marcamos como salida del modelo
+        (label) al atributo "income".
+      </p>
+      <p><img src="ModeladoAdultIncome_files/adult2.png" /></p>
+      <h3 id="modelado">Modelado</h3>
+      <p>
+        Como se especificó anteriormente, en este análisis buscamos ver cual
+        modelo utilizado tendrá un mejor rendimiento sobre el conjunto de datos
+        utilizado, es por ello que realizaremos el entrenamiento utilizando un
+        bloque "Compare ROC's" que nos permite entrenar y comparar nuestros
+        datos con varios algoritmos.
+      </p>
+      <p>
+        Utilizaremos Naive bayes, random forest (1000 árboles, maxima
+        profundidad) y Regresión logística.
+      </p>
+      <p>
+        Asimismo, previo al bloque "Compare ROC's", usaremos un "multiply" y
+        haremos 3 bloques validation, uno para cada uno de los modelos y bloques
+        de Performance binomial con "AUC" , "precision" y "recall" marcados.
+      </p>
+      <h4 id="modelo">Modelo</h4>
+      <p><img src="ModeladoAdultIncome_files/adult7.png" /></p>
+      <h4 id="performance-logistic-regression">
+        Performance logistic regression
+      </h4>
+      <p><img src="ModeladoAdultIncome_files/adult4.png" /></p>
+      <h4 id="performance-naive-bayes">Performance Naive Bayes</h4>
+      <p><img src="ModeladoAdultIncome_files/adult5.png" /></p>
+      <h4 id="performance-random-forest">Performance Random Forest</h4>
+      <p><img src="ModeladoAdultIncome_files/adult6.png" /></p>
+      <h4 id="curva-roc-entre-los-3-modelos">Curva ROC entre los 3 modelos</h4>
+      <p><img src="ModeladoAdultIncome_files/adult3.png" /></p>
+      <h4 id="puntuaciones-auc">Puntuaciones AUC:</h4>
+      <ul>
+        <li>Logistic regression: 0.907</li>
+        <li>Naive Bayes: 0.884</li>
+        <li>Random Forest: 0.912</li>
+      </ul>
+      <h3 id="observaciones">Observaciones</h3>
+      <p>
+        A la hora de comparar modelos, la accuracy del modelo no es un indicador
+        suficiente de que tan performante fue. Es de ahí que surge el uso de las
+        Curvas ROC. Estas se basan en la graficación de la comparativa entre
+        verdaderos positivos y falsos positivos en cada punto de la curva, lo
+        cual nos da una imagen viva de como el modelo se maneja clasificando a
+        medida que avanza. <br />
+        En particular, se puede apreciar como Naive Bayes, tiene una alta
+        accuracy (80,69%) comparado con el resto de los modelos. Aun asi, en la
+        gráfica ROC se ve claramente que su rendimiento es mucho peor, ¿Por qué
+        ocurre esto?. Si bien su accuracy es muy buena, vemos que el recall para
+        la clase de ingresos mayores a 50k, es de un 35.12%, lo cual es muy
+        bajo. Esto indica una cantidad enorme de falsos positivos, dato no menor
+        en problemas de clasificación binomial. Esto demuestra la importancia de
+        ver todos estos indicadores ya que a simple vista parece que tenemos un
+        modelo exitoso cuando no es así ni por asomo.
+      </p>
+      <p>
+        Finalmente, la Regresión logística y Random forest se comportan muy
+        parecidos con estos datos, siendo el mejor de ambos Random Forest con
+        mayor recall y precisión en todos los casos, indicando una mayor tasa de
+        verdaderos positivos y de verdaderos negativos. En la gráfica ROC, sus
+        curvas se ven bastante parecidas, indicando lo analizado anteriormente y
+        su área debajo de la curva (AUC) también es muy parecida (0.907 para
+        regresión y 0.912 para Random forest).
+      </p>
+      <h2 id="conclusión">Conclusión</h2>
+      <p>
+        Se demuestra el uso de indicadores alternativos para medir la
+        performance de los modelos, se explica el funcionamiento de las matrices
+        de confusión (matriz de performance) y de las gráficas ROC y su
+        interpretación.
+      </p>
+      <h2 id="referencias">Referencias</h2>
+      <ul>
+        <li>
+          <a href="https://www.kaggle.com/uciml/adult-census-income">Dataset</a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/aparedes1998/aparedes1998.github.io/blob/master/Files/adult-income.rmp"
+            >Proceso de rapidminer</a
+          >
+        </li>
+      </ul>
+    </div>
+    <style type="text/css">
+      @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+      body {
+        color: #dcdcdc;
+        background-color: #0d1117;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body > #content {
+        text-align: justify;
+        font-kerning: normal;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-feature-settings: "kern" 1;
+        -moz-font-feature-settings: "kern" 1;
+        -o-font-feature-settings: "kern" 1;
+        font-feature-settings: "kern" 1;
+        margin-top: 2%;
+        max-width: 900px;
+        border: 1px solid #555555;
+        padding: 10px 40px;
+        padding-bottom: 20px;
+        border-radius: 2px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+          Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol", "Poppins";
+        color: #dcdcdc;
+      }
+
+      hr {
+        color: #bbb;
+        background-color: #bbb;
+        height: 1px;
+        flex: 0 1 auto;
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+      }
+
+      /**
+       * Links
+       */
+      #content a {
+        color: #0366d6;
+        text-decoration: none;
+      }
+      #content a:visited {
+        color: #0366d6;
+      }
+      #content a:hover {
+        color: #0366d6;
+        text-decoration: underline;
+      }
+      pre {
+        background-color: #161b22;
+        border-radius: 3px;
+        font-size: 85%;
+        line-height: 1.45;
+        overflow: auto;
+        padding: 16px;
+      }
+
+      /**
+        * Code blocks
+        */
+
+      code {
+        background-color: rgba(27, 31, 35, 0.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        word-wrap: break-word;
+        padding: 0.2em 0.4em;
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+          monospace;
+      }
+
+      pre > code {
+        background-color: transparent;
+        border: 0;
+        display: inline;
+        line-height: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        word-wrap: normal;
+        font-size: 100%;
+        white-space: pre-wrap;
+      }
+
+      /**
+       * Blockquotes
+       */
+      blockquote {
+        margin-left: 30px;
+        margin-top: 0px;
+        margin-bottom: 16px;
+        border-left-width: 3px;
+        padding: 0 1em;
+        color: #828282;
+        border-left: 4px solid #e8e8e8;
+        padding-left: 15px;
+        font-size: 18px;
+        letter-spacing: -1px;
+        font-style: italic;
+      }
+      blockquote * {
+        font-style: normal !important;
+        letter-spacing: 0;
+        color: #6a737d !important;
+      }
+
+      /**
+       * Tables
+       */
+      table {
+        border-spacing: 2px;
+        display: block;
+        font-size: 14px;
+        overflow: auto;
+        width: 100%;
+        margin-bottom: 16px;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+
+      td {
+        padding: 6px 13px;
+        border: 1px solid #dfe2e5;
+      }
+
+      th {
+        font-weight: 600;
+        padding: 6px 13px;
+        border: 1px solid #dfe2e5;
+      }
+
+      tr {
+        background-color: #fff;
+        border-top: 1px solid #c6cbd1;
+      }
+
+      table tr:nth-child(2n) {
+        background-color: #f6f8fa;
+      }
+
+      /**
+       * Others
+       */
+
+      img {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      p {
+        line-height: 24px;
+        font-weight: 400;
+        font-size: 16px;
+        color: #dcdcdc;
+      }
+
+      #content ul {
+        margin-top: 0;
+      }
+
+      #content li {
+        color: #dcdcdc;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      #content li + #content li {
+        margin-top: 0.25em;
+      }
+
+      #content a:visited {
+        color: #0366d6;
+      }
+
+      h1,
+      h2,
+      h3 {
+        border-bottom: 1px solid #555555;
+        color: #dcdcdc;
+        /* Darker */
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 100px;
+        background: #161b22;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      header .logo {
+        color: #fff;
+        height: 50px;
+        line-height: 50px;
+        font-size: 24px;
+        float: left;
+        font-weight: bold;
+      }
+
+      header nav {
+        float: right;
+      }
+
+      header nav ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      header nav ul li {
+        list-style: none;
+      }
+
+      header nav ul li a {
+        height: 50px;
+        line-height: 50px;
+        padding: 0 20px;
+        color: #fff;
+        text-decoration: none;
+        display: block;
+      }
+
+      header nav ul li a:hover {
+        color: #fff;
+        background-color: #2196f3;
+      }
+
+      .menu-toggle {
+        color: #fff;
+        float: right;
+        line-height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        display: none;
+      }
+
+      @media (max-width: 991px) {
+        header {
+          padding: 0 20px;
+          z-index: 1;
+        }
+        .menu-toggle {
+          display: block;
+          margin-top: 13;
+        }
+        header nav {
+          position: absolute;
+          width: 100%;
+          height: calc(100vh - 50px);
+          background: #333;
+          top: 50px;
+          left: -100%;
+          transition: 0.5s;
+        }
+        header nav.active {
+          left: 0;
+        }
+        header nav ul {
+          display: block;
+          text-align: center;
+        }
+
+        header nav ul li a {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        pre > code {
+          font-size: 75%;
+        }
+      }
+    </style>
+    <style type="text/css">
+      /*
+      
+      github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+      
+      */
+
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #c9d1d9;
+        background: #161b22;
+      }
+
+      .hljs-comment,
+      .hljs-quote {
+        color: #6aa94f;
+        font-style: italic;
+      }
+
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #569cd6;
+        font-weight: bold;
+      }
+
+      .hljs-number,
+      .hljs-literal,
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-tag .hljs-attr {
+        color: #008080;
+      }
+
+      .hljs-string,
+      .hljs-doctag {
+        color: #d14;
+      }
+
+      .hljs-title,
+      .hljs-section,
+      .hljs-selector-id {
+        color: #dcdcaa;
+        font-weight: bold;
+      }
+
+      .hljs-subst {
+        font-weight: normal;
+      }
+
+      .hljs-type,
+      .hljs-class .hljs-title {
+        color: #458;
+        font-weight: bold;
+      }
+
+      .hljs-tag,
+      .hljs-name,
+      .hljs-attribute {
+        color: #000080;
+        font-weight: normal;
+      }
+
+      .hljs-regexp,
+      .hljs-link {
+        color: #009926;
+      }
+
+      .hljs-symbol,
+      .hljs-bullet {
+        color: #990073;
+      }
+
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
+
+      .hljs-meta {
+        color: #999;
+        font-weight: bold;
+      }
+
+      .hljs-deletion {
+        background: #fdd;
+      }
+
+      .hljs-addition {
+        background: #dfd;
+      }
+
+      .hljs-emphasis {
+        font-style: italic;
+      }
+
+      .hljs-strong {
+        font-weight: bold;
+      }
+    </style>
+  </body>
+</html>
