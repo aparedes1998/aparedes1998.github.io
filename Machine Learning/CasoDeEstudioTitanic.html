@@ -1,76 +1,114 @@
 <html>
-  <head>  
-
-        <title>Analisis Titanic</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-      </head>        
-        <body>
-          <header>
-            <div class="logo">AGUSTIN PAREDES</div>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../Machine Learning.html">Machine Learning</a></li>
-                    <li><a href="#">Proximamente ...</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" onclick="show()"><i class="fa fa-bars" aria-hidden="true"></i></div>
-        </header>
-        <script>
-          
-            function show(){
-                let toggle = document.querySelector('.menu-toggle');
-                let navigation= document.querySelector('nav');
-                navigation.classList.toggle('active');
-            }
-        </script>
-          <div id="content">
-      <h1 id="caso-de-estudio-dataset-titanic-con-sklearn">Caso de estudio: Dataset Titanic con sklearn</h1>
-<p><img src="CasoDeEstudioTitanic_files/analisistitanic.jpg"></p>
-<p>En este caso de estudio, vamos a ver el uso del lenguaje Python con 
-la librería sklearn para realizar una análisis de los datos del dataset 
-Titanic. Además, se mostrarán métodos para la limpieza de los datos como
- en la sección anterior y por último realizaremos una pequeña 
-introducción a Feature Engineering.</p>
-<h2 id="¿qué-contiene-este-dataset">¿Qué contiene este dataset?</h2>
-<p>El dataset analizado posee varios datos sobre pasajeros a bordo del 
-Titanic en 1912 y una distinción donde se especifica si estos 
-sobrevivieron o no. </p>
-<p>Los datos o atributos en el dataset son los siguientes:</p>
-<ul>
-<li>Survival: Booleano que identifica si el pasajero sobrevivió (0 = NO, 1 = SI)</li>
-<li>IdPasajero: Número para identificar al pasajero, completamente arbitrario</li>
-<li>PClass: Clase de ticket del pasajero, 1ra, 2da o 3ra clase (siendo 
-la 1ra la más cara y la posicionada más alta en el barco y la 3ra la 
-económica y la posicionada más abajo en el barco).</li>
-<li>Name: Nombre del pasajero</li>
-<li>Sex: Sexo del pasajero (male o female)</li>
-<li>Age: Edad del pasajero</li>
-<li>SibSp: Número de hermanos o esposo/a abordo del titanic</li>
-<li>Parch: Número de padres/hijos abordo del titanic</li>
-<li>Ticket: Identificador alfanumérico del ticket</li>
-<li>Fare: Precio del ticket </li>
-<li>Cabin: Identificador de la cabina correspondiente a su ticket.</li>
-<li>Embarked: Puerto de embarcación (C = Cherbourg, Q = Queenstown, S = Southampton)</li>
-</ul>
-<p>El objetivo de este dataset es, utilizando todos las variables, poder
- predecir a futuro la probabilidad de que supervivencia de un pasajero 
-nuevo X dados todos los datos salvo, obviamente, si sobrevivió o no.</p>
-<h2 id="carga-de-datos">Carga de datos</h2>
-<p>Antes de comenzar, debemos descargar los datasets de <a href="https://github.com/aparedes1998/aparedes1998.github.io/blob/master/Trabajos%20domiciliarios/UT2/UT2_PD4/train.csv">training</a> y el de <a href="https://github.com/aparedes1998/aparedes1998.github.io/blob/master/Trabajos%20domiciliarios/UT2/UT2_PD4/test.csv">testing</a>.
- En el aprendizaje automático, el set de training es aquel cuya salida 
-ya es sabida (en este caso, si la persona sobrevivió o no) y el de 
-testing es aquel que se utiliza para probar las predicciones del modelo.
- También existe lo que se llama set de validación, que si bien su salida
- es sabida, lo utilizamos como prueba para validar que el modelo 
-funciona adecuadamente, eliminando la etiqueta (supervivencia) y luego 
-verificando si la salida del modelo coincide con la etiqueta original.</p>
-<p>Por último, se necesitará un compilador del lenguaje <a href="https://www.python.org/">Python</a> y la librería <a href="https://scikit-learn.org/stable/">SKLearn</a> instalada. Para este tutorial, se recomienda utilizar la herramienta de <a href="https://colab.research.google.com/">Google Colab</a>
- que tiene un intérprete online de Python con varias librerías ya 
-descargadas (incluyendo SKLearn) y es completamente gratuito de usar.</p>
-<p>Debemos comenzar importando las librerías:</p>
-<pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np 
+  <head>
+    <title>Analisis Titanic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">AGUSTIN PAREDES</div>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../Machine Learning.html">Machine Learning</a></li>
+          <li><a href="#">Proximamente ...</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle" onclick="show()">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+    <script>
+      function show() {
+        let toggle = document.querySelector(".menu-toggle");
+        let navigation = document.querySelector("nav");
+        navigation.classList.toggle("active");
+      }
+    </script>
+    <div id="content">
+      <h1 id="caso-de-estudio-dataset-titanic-con-sklearn">
+        Caso de estudio: Dataset Titanic con sklearn
+      </h1>
+      <p><img src="CasoDeEstudioTitanic_files/analisistitanic.jpg" /></p>
+      <p>
+        En este caso de estudio, vamos a ver el uso del lenguaje Python con la
+        librería sklearn para realizar una análisis de los datos del dataset
+        Titanic. Además, se mostrarán métodos para la limpieza de los datos como
+        en la sección anterior y por último realizaremos una pequeña
+        introducción a Feature Engineering.
+      </p>
+      <h2 id="¿qué-contiene-este-dataset">¿Qué contiene este dataset?</h2>
+      <p>
+        El dataset analizado posee varios datos sobre pasajeros a bordo del
+        Titanic en 1912 y una distinción donde se especifica si estos
+        sobrevivieron o no.
+      </p>
+      <p>Los datos o atributos en el dataset son los siguientes:</p>
+      <ul>
+        <li>
+          Survival: Booleano que identifica si el pasajero sobrevivió (0 = NO, 1
+          = SI)
+        </li>
+        <li>
+          IdPasajero: Número para identificar al pasajero, completamente
+          arbitrario
+        </li>
+        <li>
+          PClass: Clase de ticket del pasajero, 1ra, 2da o 3ra clase (siendo la
+          1ra la más cara y la posicionada más alta en el barco y la 3ra la
+          económica y la posicionada más abajo en el barco).
+        </li>
+        <li>Name: Nombre del pasajero</li>
+        <li>Sex: Sexo del pasajero (male o female)</li>
+        <li>Age: Edad del pasajero</li>
+        <li>SibSp: Número de hermanos o esposo/a abordo del titanic</li>
+        <li>Parch: Número de padres/hijos abordo del titanic</li>
+        <li>Ticket: Identificador alfanumérico del ticket</li>
+        <li>Fare: Precio del ticket</li>
+        <li>Cabin: Identificador de la cabina correspondiente a su ticket.</li>
+        <li>
+          Embarked: Puerto de embarcación (C = Cherbourg, Q = Queenstown, S =
+          Southampton)
+        </li>
+      </ul>
+      <p>
+        El objetivo de este dataset es, utilizando todos las variables, poder
+        predecir a futuro la probabilidad de que supervivencia de un pasajero
+        nuevo X dados todos los datos salvo, obviamente, si sobrevivió o no.
+      </p>
+      <h2 id="carga-de-datos">Carga de datos</h2>
+      <p>
+        Antes de comenzar, debemos descargar los datasets de
+        <a
+          href="https://github.com/aparedes1998/aparedes1998.github.io/blob/master/Trabajos%20domiciliarios/UT2/UT2_PD4/train.csv"
+          >training</a
+        >
+        y el de
+        <a
+          href="https://github.com/aparedes1998/aparedes1998.github.io/blob/master/Trabajos%20domiciliarios/UT2/UT2_PD4/test.csv"
+          >testing</a
+        >. En el aprendizaje automático, el set de training es aquel cuya salida
+        ya es sabida (en este caso, si la persona sobrevivió o no) y el de
+        testing es aquel que se utiliza para probar las predicciones del modelo.
+        También existe lo que se llama set de validación, que si bien su salida
+        es sabida, lo utilizamos como prueba para validar que el modelo funciona
+        adecuadamente, eliminando la etiqueta (supervivencia) y luego
+        verificando si la salida del modelo coincide con la etiqueta original.
+      </p>
+      <p>
+        Por último, se necesitará un compilador del lenguaje
+        <a href="https://www.python.org/">Python</a> y la librería
+        <a href="https://scikit-learn.org/stable/">SKLearn</a> instalada. Para
+        este tutorial, se recomienda utilizar la herramienta de
+        <a href="https://colab.research.google.com/">Google Colab</a> que tiene
+        un intérprete online de Python con varias librerías ya descargadas
+        (incluyendo SKLearn) y es completamente gratuito de usar.
+      </p>
+      <p>Debemos comenzar importando las librerías:</p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np 
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd 
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt
@@ -84,14 +122,22 @@ warnings.filterwarnings(<span class="hljs-string">"ignore"</span>)
 
 <span class="hljs-keyword">import</span> os 
 </code></pre>
-<p>Luego, debemos cargar los datasets descargados, la ruta variará dependiendo del ambiente.</p>
-<pre><code class="hljs python language-python">training = pd.read_csv(<span class="hljs-string">"/content/sample_data/train.csv"</span>)
+      <p>
+        Luego, debemos cargar los datasets descargados, la ruta variará
+        dependiendo del ambiente.
+      </p>
+      <pre><code class="hljs python language-python">training = pd.read_csv(<span class="hljs-string">"/content/sample_data/train.csv"</span>)
 testing = pd.read_csv(<span class="hljs-string">"/content/sample_data/test.csv"</span>)
 </code></pre>
-<p>Finalmente, estamos en condiciones de comenzar a analizar el dataset.</p>
-<h2 id="manejo-de-datos-faltantes">Manejo de datos faltantes</h2>
-<p>Con el uso de la librería Pandas, podemos ver las columnas con datos faltantes contando todos los valores nulos en ellas</p>
-<pre><code class="hljs python language-python"><span class="hljs-comment"># Filtrado de datos faltantes con pandas</span>
+      <p>
+        Finalmente, estamos en condiciones de comenzar a analizar el dataset.
+      </p>
+      <h2 id="manejo-de-datos-faltantes">Manejo de datos faltantes</h2>
+      <p>
+        Con el uso de la librería Pandas, podemos ver las columnas con datos
+        faltantes contando todos los valores nulos en ellas
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-comment"># Filtrado de datos faltantes con pandas</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">null_table</span><span class="hljs-params">(training, testing)</span>:</span>
     print(<span class="hljs-string">"Training Data Frame"</span>)
     print(pd.isnull(training).sum()) 
@@ -101,15 +147,19 @@ testing = pd.read_csv(<span class="hljs-string">"/content/sample_data/test.csv"<
 
 null_table(training, testing)
 </code></pre>
-<p>El resultado de esta función, nos mostrará como tenemos muchísimos 
-datos faltantes en "Age" y en "Cabin". Por contexto sabemos que el dato 
-de Cabin no es importante al igual que Ticket, ya que son combinaciones 
-alfanuméricas completamente aleatorias que no tienen correlación con los
- demás parámetros.</p>
-<p>Para manejar los datos faltantes de Age, utilizaremos otra función de
- pandas que nos permite rellenar los datos no existentes con la media 
-del atributo elegido con los datos que si lo tienen.</p>
-<pre><code class="hljs python language-python"><span class="hljs-comment">## Eliminamos los atributos que no nos sirven</span>
+      <p>
+        El resultado de esta función, nos mostrará como tenemos muchísimos datos
+        faltantes en "Age" y en "Cabin". Por contexto sabemos que el dato de
+        Cabin no es importante al igual que Ticket, ya que son combinaciones
+        alfanuméricas completamente aleatorias que no tienen correlación con los
+        demás parámetros.
+      </p>
+      <p>
+        Para manejar los datos faltantes de Age, utilizaremos otra función de
+        pandas que nos permite rellenar los datos no existentes con la media del
+        atributo elegido con los datos que si lo tienen.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-comment">## Eliminamos los atributos que no nos sirven</span>
 training.drop(labels = [<span class="hljs-string">"Cabin"</span>, <span class="hljs-string">"Ticket"</span>], axis = <span class="hljs-number">1</span>, inplace = <span class="hljs-literal">True</span>)
 testing.drop(labels = [<span class="hljs-string">"Cabin"</span>, <span class="hljs-string">"Ticket"</span>], axis = <span class="hljs-number">1</span>, inplace = <span class="hljs-literal">True</span>)
 
@@ -121,18 +171,25 @@ testing[<span class="hljs-string">"Fare"</span>].fillna(testing[<span class="hlj
 
 null_table(training, testing)
 </code></pre>
-<p>Al imprimir nuevamente la tabla de valores nulos, vemos que pandas ya no identifica más valores faltantes.</p>
-<p><img src="CasoDeEstudioTitanic_files/sklearntitanic1.png"></p>
-<h2 id="visualización-de-data">Visualización de Data</h2>
-<p>La librería seaborn de Python junto a matplotlib nos permite crear 
-gráficas programáticamente utilizando de 2 a n parámetros. A 
-continuación, vamos a crear tres gráficas:</p>
-<ul>
-<li>Supervivencia en función del sexo </li>
-<li>Supervivencia en función de la clase del ticket (1ra, 2da o 3ra clase)</li>
-<li>Supervivencia en función a ambos parámetros simultáneamente</li>
-</ul>
-<pre><code class="hljs python language-python"><span class="hljs-comment"># Visualización de data, supervivencia en base al sexo</span>
+      <p>
+        Al imprimir nuevamente la tabla de valores nulos, vemos que pandas ya no
+        identifica más valores faltantes.
+      </p>
+      <p><img src="CasoDeEstudioTitanic_files/sklearntitanic1.png" /></p>
+      <h2 id="visualización-de-data">Visualización de Data</h2>
+      <p>
+        La librería seaborn de Python junto a matplotlib nos permite crear
+        gráficas programáticamente utilizando de 2 a n parámetros. A
+        continuación, vamos a crear tres gráficas:
+      </p>
+      <ul>
+        <li>Supervivencia en función del sexo</li>
+        <li>
+          Supervivencia en función de la clase del ticket (1ra, 2da o 3ra clase)
+        </li>
+        <li>Supervivencia en función a ambos parámetros simultáneamente</li>
+      </ul>
+      <pre><code class="hljs python language-python"><span class="hljs-comment"># Visualización de data, supervivencia en base al sexo</span>
 
 sns.barplot(x=<span class="hljs-string">"Sex"</span>, y=<span class="hljs-string">"Survived"</span>, data=training)
 plt.title(<span class="hljs-string">"Distribution of Survival based on Gender"</span>)
@@ -141,55 +198,67 @@ plt.show()
 total_survived_females = training[training.Sex == <span class="hljs-string">"female"</span>][<span class="hljs-string">"Survived"</span>].sum()
 total_survived_males = training[training.Sex == <span class="hljs-string">"male"</span>][<span class="hljs-string">"Survived"</span>].sum()
 </code></pre>
-<pre><code class="hljs python language-python"><span class="hljs-comment"># Porcentaje de hombres y mujeres de los supervivientes para cada clase de pasajero (ticket)</span>
+      <pre><code class="hljs python language-python"><span class="hljs-comment"># Porcentaje de hombres y mujeres de los supervivientes para cada clase de pasajero (ticket)</span>
 
 sns.barplot(x=<span class="hljs-string">"Pclass"</span>, y=<span class="hljs-string">"Survived"</span>, hue=<span class="hljs-string">"Sex"</span>, data=training)
 plt.ylabel(<span class="hljs-string">"Survival Rate"</span>)
 plt.title(<span class="hljs-string">"Survival Rates Based on Gender and Class"</span>)
 </code></pre>
-<pre><code class="hljs python language-python"><span class="hljs-comment"># Supervivencia en función del sexo con porcentaje de cada clase de pasajero (ticket)</span>
+      <pre><code class="hljs python language-python"><span class="hljs-comment"># Supervivencia en función del sexo con porcentaje de cada clase de pasajero (ticket)</span>
 
 sns.barplot(x=<span class="hljs-string">"Sex"</span>, y=<span class="hljs-string">"Survived"</span>, hue=<span class="hljs-string">"Pclass"</span>, data=training)
 plt.ylabel(<span class="hljs-string">"Survival Rate"</span>)
 plt.title(<span class="hljs-string">"Survival Rates Based on Gender and Class"</span>)
 </code></pre>
-<p><img src="CasoDeEstudioTitanic_files/sklearntitanic2.png"></p>
-<p>Al visualizar esta data, podemos realizar conclusiones muy 
-interesantes. En principio, vemos como la supervivencia de las mujeres 
-es muchísimo más alta que la de los hombres (68% de los supervivientes 
-son mujeres y 32% hombres). Esto viene dado a que durante el momento de 
-crisis, las mujeres y los niños fueron prioridad para ser escoltados a 
-los botes salvavidas, lo cual se demuestra en el análisis.</p>
-<p>Otra conclusión que podemos realizar, es que , a mejor ticket, mejor 
-chance de sobrevivir. La proporción de pasajero que sobrevivieron por 
-clase fueron:</p>
-<ul>
-<li>60% de los pasajeros en primera clase</li>
-<li>48% de los pasajeros en segunda clase</li>
-<li>25% de los pasajeros en tercera clase</li>
-</ul>
-<p>Claramente esto se debe a las posiciones en el barco. Cuando el 
-Titanic impacta contra el iceberg, el barco comienza a inundarse desde 
-abajo hacia arriba. Asimismo, al estar más arriba los pasajeros en 
-primera clase, estaban mucho más cerca de los barcos salvavidas, lo que 
-hizo que fueran prioridad para abordarlos.</p>
-<p>En la gráfica final, vemos el mismo comportamiento combinado, en cada
- sexo, la mayoría de los supervivientes fueron de la primera clase, 
-seguido de la segunda y luego la tercera. Asimismo, la chance de 
-supervivencia es altísima para las mujeres. Podemos ver que casi un 100%
- de las mujeres en primera clase lograron sobrevivir a la catástrofe.</p>
-<h2 id="feature-engineering">Feature Engineering</h2>
-<p>Como su nombre indica, es el proceso de la ingeniería de las 
-características de los datos. Se utiliza el conocimiento previo de los 
-datos para decidir, primero si un dato es importante para la predicción 
-de otros y luego ver una forma de utilizarlo. </p>
-<p>En el siguiente ejemplo veremos como podemos utilizar datos 
-categóricos en un modelo de ML. Los datos de sexo y embarque son 
-categóricos por lo que debemos convertirlos en algo numérico para que 
-nuestros modelos puedan utilizarlos en la predicción. Para cumplir con 
-este objetivo, utilizaremos la funcionalidad de LabelEconder de sklearn 
-que permite convertir un valor categórico a uno numérico. </p>
-<pre><code class="hljs python language-python"><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> LabelEncoder
+      <p><img src="CasoDeEstudioTitanic_files/sklearntitanic2.png" /></p>
+      <p>
+        Al visualizar esta data, podemos realizar conclusiones muy interesantes.
+        En principio, vemos como la supervivencia de las mujeres es muchísimo
+        más alta que la de los hombres (68% de los supervivientes son mujeres y
+        32% hombres). Esto viene dado a que durante el momento de crisis, las
+        mujeres y los niños fueron prioridad para ser escoltados a los botes
+        salvavidas, lo cual se demuestra en el análisis.
+      </p>
+      <p>
+        Otra conclusión que podemos realizar, es que , a mejor ticket, mejor
+        chance de sobrevivir. La proporción de pasajero que sobrevivieron por
+        clase fueron:
+      </p>
+      <ul>
+        <li>60% de los pasajeros en primera clase</li>
+        <li>48% de los pasajeros en segunda clase</li>
+        <li>25% de los pasajeros en tercera clase</li>
+      </ul>
+      <p>
+        Claramente esto se debe a las posiciones en el barco. Cuando el Titanic
+        impacta contra el iceberg, el barco comienza a inundarse desde abajo
+        hacia arriba. Asimismo, al estar más arriba los pasajeros en primera
+        clase, estaban mucho más cerca de los barcos salvavidas, lo que hizo que
+        fueran prioridad para abordarlos.
+      </p>
+      <p>
+        En la gráfica final, vemos el mismo comportamiento combinado, en cada
+        sexo, la mayoría de los supervivientes fueron de la primera clase,
+        seguido de la segunda y luego la tercera. Asimismo, la chance de
+        supervivencia es altísima para las mujeres. Podemos ver que casi un 100%
+        de las mujeres en primera clase lograron sobrevivir a la catástrofe.
+      </p>
+      <h2 id="feature-engineering">Feature Engineering</h2>
+      <p>
+        Como su nombre indica, es el proceso de la ingeniería de las
+        características de los datos. Se utiliza el conocimiento previo de los
+        datos para decidir, primero si un dato es importante para la predicción
+        de otros y luego ver una forma de utilizarlo.
+      </p>
+      <p>
+        En el siguiente ejemplo veremos como podemos utilizar datos categóricos
+        en un modelo de ML. Los datos de sexo y embarque son categóricos por lo
+        que debemos convertirlos en algo numérico para que nuestros modelos
+        puedan utilizarlos en la predicción. Para cumplir con este objetivo,
+        utilizaremos la funcionalidad de LabelEconder de sklearn que permite
+        convertir un valor categórico a uno numérico.
+      </p>
+      <pre><code class="hljs python language-python"><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> LabelEncoder
 
 le_sex = LabelEncoder()
 le_sex.fit(training[<span class="hljs-string">"Sex"</span>])
@@ -207,412 +276,418 @@ training[<span class="hljs-string">"Embarked"</span>] = encoded_embarked_trainin
 encoded_embarked_testing = le_embarked.transform(testing[<span class="hljs-string">"Embarked"</span>])
 testing[<span class="hljs-string">"Embarked"</span>] = encoded_embarked_testing
 </code></pre>
-<p><img src="CasoDeEstudioTitanic_files/sklearntitanic3.png"></p>
-<p>Como podemos ver, los datos fueron convertidos exitosamente en 
-numéricos, lo cual va a hacer que nuestro modelo pueda utilizar esas 
-características en sus predicciones y generar mejores resultados.</p>
-<h2 id="enlaces-de-interés">Enlaces de interés:</h2>
-<ul>
-<li><a href="https://www.kaggle.com/samsonqian/titanic-guide-with-sklearn-and-eda/notebook?scriptVersionId=17744221">Titanic: Guide with sklearn and EDA</a></li>
-<li><a href="https://www.kaggle.com/c/titanic">Competencia Titanic</a></li>
-<li><a href="https://colab.research.google.com/drive/1Kk1ADd7CeQafmILFjUEiq_HeCcLvF2wO?usp=sharing">Código completo ejecutado</a></li>
-</ul>
-          </div>
-          <style type="text/css">
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+      <p><img src="CasoDeEstudioTitanic_files/sklearntitanic3.png" /></p>
+      <p>
+        Como podemos ver, los datos fueron convertidos exitosamente en
+        numéricos, lo cual va a hacer que nuestro modelo pueda utilizar esas
+        características en sus predicciones y generar mejores resultados.
+      </p>
+      <h2 id="enlaces-de-interés">Enlaces de interés:</h2>
+      <ul>
+        <li>
+          <a
+            href="https://www.kaggle.com/samsonqian/titanic-guide-with-sklearn-and-eda/notebook?scriptVersionId=17744221"
+            >Titanic: Guide with sklearn and EDA</a
+          >
+        </li>
+        <li>
+          <a href="https://www.kaggle.com/c/titanic">Competencia Titanic</a>
+        </li>
+        <li>
+          <a
+            href="https://colab.research.google.com/drive/1Kk1ADd7CeQafmILFjUEiq_HeCcLvF2wO?usp=sharing"
+            >Código completo ejecutado</a
+          >
+        </li>
+      </ul>
+    </div>
+    <style type="text/css">
+      @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
-body {
-  color: #dcdcdc;
-  background-color: #0d1117;
-  display: flex;
-  flex-direction: column;
-  margin-top: 50;
-  justify-content: center;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-}
+      body {
+        color: #dcdcdc;
+        background-color: #0d1117;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+      }
 
+      body > #content {
+        text-align: justify;
+        font-kerning: normal;
+        -webkit-text-size-adjust: 100%;
+        -webkit-font-feature-settings: "kern" 1;
+        -moz-font-feature-settings: "kern" 1;
+        -o-font-feature-settings: "kern" 1;
+        font-feature-settings: "kern" 1;
+        margin-top: 2%;
+        max-width: 900px;
+        border: 1px solid #555555;
+        padding: 10px 40px;
+        padding-bottom: 20px;
+        border-radius: 2px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+          Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol", "Poppins";
+        color: #dcdcdc;
+      }
 
+      hr {
+        color: #bbb;
+        background-color: #bbb;
+        height: 1px;
+        flex: 0 1 auto;
+        margin: 1em 0;
+        padding: 0;
+        border: none;
+      }
 
-body > #content {
-  text-align: justify;
-  font-kerning: normal;
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  margin-top: 2%;
-  max-width: 900px;
-  border: 1px solid #555555;
-  padding: 10px 40px;
-  padding-bottom: 20px;
-  border-radius: 2px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Poppins";
-  color: #dcdcdc;
-}
-
-hr {
-  color: #bbb;
-  background-color: #bbb;
-  height: 1px;
-  flex: 0 1 auto;
-  margin: 1em 0;
-  padding: 0;
-  border: none;
-}
-
-/**
+      /**
  * Links
  */
-#content a {
-  color: #0366d6;
-  text-decoration: none; }
-  #content a:visited {
-    color: #0366d6; }
-  #content a:hover {
-    color: #0366d6;
-    text-decoration: underline; }
-pre {
-  background-color: #161b22;
-  border-radius: 3px;
-  font-size: 85%;
-  line-height: 1.45;
-  overflow: auto;
-  padding: 16px;
-}
+      #content a {
+        color: #0366d6;
+        text-decoration: none;
+      }
+      #content a:visited {
+        color: #0366d6;
+      }
+      #content a:hover {
+        color: #0366d6;
+        text-decoration: underline;
+      }
+      pre {
+        background-color: #161b22;
+        border-radius: 3px;
+        font-size: 85%;
+        line-height: 1.45;
+        overflow: auto;
+        padding: 16px;
+      }
 
-/**
+      /**
   * Code blocks
   */
 
-code {
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
-  font-size: 85%;
-  margin: 0;
-  word-wrap: break-word;
-  padding: .2em .4em;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-}
+      code {
+        background-color: rgba(27, 31, 35, 0.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        word-wrap: break-word;
+        padding: 0.2em 0.4em;
+        font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+          monospace;
+      }
 
-pre > code {
-  background-color: transparent;
-  border: 0;
-  display: inline;
-  line-height: inherit;
-  margin: 0;
-  overflow: visible;
-  padding: 0;
-  word-wrap: normal;
-  font-size: 100%;
-  white-space: pre-wrap;
-}
+      pre > code {
+        background-color: transparent;
+        border: 0;
+        display: inline;
+        line-height: inherit;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        word-wrap: normal;
+        font-size: 100%;
+        white-space: pre-wrap;
+      }
 
-
-/**
+      /**
  * Blockquotes
  */
-blockquote {
-  margin-left: 30px;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  border-left-width: 3px;
-  padding: 0 1em;
-  color: #828282;
-  border-left: 4px solid #e8e8e8;
-  padding-left: 15px;
-  font-size: 18px;
-  letter-spacing: -1px;
-  font-style: italic;
-}
-blockquote * {
-  font-style: normal !important;
-  letter-spacing: 0;
-  color: #6a737d !important;
-}
+      blockquote {
+        margin-left: 30px;
+        margin-top: 0px;
+        margin-bottom: 16px;
+        border-left-width: 3px;
+        padding: 0 1em;
+        color: #828282;
+        border-left: 4px solid #e8e8e8;
+        padding-left: 15px;
+        font-size: 18px;
+        letter-spacing: -1px;
+        font-style: italic;
+      }
+      blockquote * {
+        font-style: normal !important;
+        letter-spacing: 0;
+        color: #6a737d !important;
+      }
 
-/**
+      /**
  * Tables
  */
-table {
-  border-spacing: 2px;
-  display: block;
-  font-size: 14px;
-  overflow: auto;
-  width: 100%;
-  margin-bottom: 16px;
-  border-spacing: 0;
-  border-collapse: collapse;
-}
+      table {
+        border-spacing: 2px;
+        display: block;
+        font-size: 14px;
+        overflow: auto;
+        width: 100%;
+        margin-bottom: 16px;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
 
-td {
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
-}
+      td {
+        padding: 6px 13px;
+        border: 1px solid #dfe2e5;
+      }
 
-th {
-  font-weight: 600;
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
-}
+      th {
+        font-weight: 600;
+        padding: 6px 13px;
+        border: 1px solid #dfe2e5;
+      }
 
-tr {
-  background-color: #fff;
-  border-top: 1px solid #c6cbd1;
-}
+      tr {
+        background-color: #fff;
+        border-top: 1px solid #c6cbd1;
+      }
 
-table tr:nth-child(2n) {
-  background-color: #f6f8fa;
-}
+      table tr:nth-child(2n) {
+        background-color: #f6f8fa;
+      }
 
-/**
+      /**
  * Others
  */
 
-img {
-  max-width: 100%;
-  width: 100%;
-}
-
-p {
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #dcdcdc; }
-
-#content ul {
-  margin-top: 0; }
-
-
-#content li {
-  color: #dcdcdc;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; }
-
-#content li + #content li {
-  margin-top: 0.25em; }
-
-
-
-  #content a:visited {
-  color: #0366d6; }
-
-h1, h2, h3 {
-  border-bottom: 1px solid #555555;
-  color: #dcdcdc;
-  /* Darker */ }
-
-header
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0 100px;
-    background: #161b22;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-header .logo
-{
-    color: #fff;
-    height: 50px;
-    line-height: 50px;
-    font-size: 24px;
-    float: left;
-    font-weight: bold;
-}
-
-header nav 
-{
-    float: right;
-
-}
-
-header nav ul
-{
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-header nav ul li
-{
-    list-style: none;
-}
-
-header nav ul li a
-{
-    height: 50px;
-    line-height: 50px;
-    padding: 0 20px;
-    color: #fff;
-    text-decoration: none;
-    display: block;
-}
-
-header nav ul li a:hover
-{
-    color: #fff;
-    background-color: #2196f3;
-}
-
-.menu-toggle
-{
-    color: #fff;
-    float: right;
-    line-height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
-}
-
-@media (max-width: 991px)
-{
-    header
-    {
-        padding: 0 20px;
-        z-index: 1;
-    }
-    .menu-toggle
-    {
-        display: block;
-        margin-top: 13;
-    }
-    header nav
-    {
-        position: absolute;
+      img {
+        max-width: 100%;
         width: 100%;
-        height: calc(100vh - 50px);
-        background: #333;
-        top: 50px;
-        left: -100%;
-        transition: 0.5s;
-    }
-    header nav.active
-    {
+      }
+
+      p {
+        line-height: 24px;
+        font-weight: 400;
+        font-size: 16px;
+        color: #dcdcdc;
+      }
+
+      #content ul {
+        margin-top: 0;
+      }
+
+      #content li {
+        color: #dcdcdc;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      #content li + #content li {
+        margin-top: 0.25em;
+      }
+
+      #content a:visited {
+        color: #0366d6;
+      }
+
+      h1,
+      h2,
+      h3 {
+        border-bottom: 1px solid #555555;
+        color: #dcdcdc;
+        /* Darker */
+      }
+
+      header {
+        position: absolute;
+        top: 0;
         left: 0;
-    }
-    header nav ul
-    {
+        padding: 0 100px;
+        background: #161b22;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      header .logo {
+        color: #fff;
+        height: 50px;
+        line-height: 50px;
+        font-size: 24px;
+        float: left;
+        font-weight: bold;
+      }
+
+      header nav {
+        float: right;
+      }
+
+      header nav ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      header nav ul li {
+        list-style: none;
+      }
+
+      header nav ul li a {
+        height: 50px;
+        line-height: 50px;
+        padding: 0 20px;
+        color: #fff;
+        text-decoration: none;
         display: block;
-        text-align: center;
-    }
+      }
 
-    header nav ul li a 
-    {
-        border-bottom: 1px solid rgba(0,0,0,.2);
-    }
+      header nav ul li a:hover {
+        color: #fff;
+        background-color: #2196f3;
+      }
 
-    pre > code {      
-      font-size: 75%;
-    }
-    
-}
-</style>
-<style type="text/css">/*
+      .menu-toggle {
+        color: #fff;
+        float: right;
+        line-height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        display: none;
+      }
+
+      @media (max-width: 991px) {
+        header {
+          padding: 0 20px;
+          z-index: 1;
+        }
+        .menu-toggle {
+          display: block;
+          margin-top: 13;
+        }
+        header nav {
+          position: absolute;
+          width: 100%;
+          height: calc(100vh - 50px);
+          background: #333;
+          top: 50px;
+          left: -100%;
+          transition: 0.5s;
+        }
+        header nav.active {
+          left: 0;
+        }
+        header nav ul {
+          display: block;
+          text-align: center;
+        }
+
+        header nav ul li a {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        pre > code {
+          font-size: 75%;
+        }
+      }
+    </style>
+    <style type="text/css">
+      /*
 
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: #c9d1d9;
-  background: #161b22;
-}
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #c9d1d9;
+        background: #161b22;
+      }
 
-.hljs-comment,
-.hljs-quote {
-  color: #6aa94f;
-  font-style: italic;
-}
+      .hljs-comment,
+      .hljs-quote {
+        color: #6aa94f;
+        font-style: italic;
+      }
 
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #569cd6;
-  font-weight: bold;
-}
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-subst {
+        color: #569cd6;
+        font-weight: bold;
+      }
 
-.hljs-number,
-.hljs-literal,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #008080;
-}
+      .hljs-number,
+      .hljs-literal,
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-tag .hljs-attr {
+        color: #008080;
+      }
 
-.hljs-string,
-.hljs-doctag {
-  color: #d14;
-}
+      .hljs-string,
+      .hljs-doctag {
+        color: #d14;
+      }
 
-.hljs-title,
-.hljs-section,
-.hljs-selector-id {
-  color: #dcdcaa;
-  font-weight: bold;
-}
+      .hljs-title,
+      .hljs-section,
+      .hljs-selector-id {
+        color: #dcdcaa;
+        font-weight: bold;
+      }
 
-.hljs-subst {
-  font-weight: normal;
-}
+      .hljs-subst {
+        font-weight: normal;
+      }
 
-.hljs-type,
-.hljs-class .hljs-title {
-  color: #458;
-  font-weight: bold;
-}
+      .hljs-type,
+      .hljs-class .hljs-title {
+        color: #458;
+        font-weight: bold;
+      }
 
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-  color: #000080;
-  font-weight: normal;
-}
+      .hljs-tag,
+      .hljs-name,
+      .hljs-attribute {
+        color: #000080;
+        font-weight: normal;
+      }
 
-.hljs-regexp,
-.hljs-link {
-  color: #009926;
-}
+      .hljs-regexp,
+      .hljs-link {
+        color: #009926;
+      }
 
-.hljs-symbol,
-.hljs-bullet {
-  color: #990073;
-}
+      .hljs-symbol,
+      .hljs-bullet {
+        color: #990073;
+      }
 
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #0086b3;
-}
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #0086b3;
+      }
 
-.hljs-meta {
-  color: #999;
-  font-weight: bold;
-}
+      .hljs-meta {
+        color: #999;
+        font-weight: bold;
+      }
 
-.hljs-deletion {
-  background: #fdd;
-}
+      .hljs-deletion {
+        background: #fdd;
+      }
 
-.hljs-addition {
-  background: #dfd;
-}
+      .hljs-addition {
+        background: #dfd;
+      }
 
-.hljs-emphasis {
-  font-style: italic;
-}
+      .hljs-emphasis {
+        font-style: italic;
+      }
 
-.hljs-strong {
-  font-weight: bold;
-}
-</style>
-        
-      </body></html>
+      .hljs-strong {
+        font-weight: bold;
+      }
+    </style>
+  </body>
+</html>
